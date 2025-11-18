@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up | Digital Taekwondo Academy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* --- Color Palette Refinement --- */
+        :root {
+            --primary: #CC0000; /* A slightly deeper, richer red */
+            --primary-dark: #A30000; /* Darker red for depth */
+            --primary-light: #FF3333; /* Brighter, more vibrant red for accents and highlights */
+            --dark: #121212; /* Very dark background, almost black */
+            --darker: #080808; /* Even deeper for contrasts, pure black effect */
+            --light: #E0E0E0; /* Soft light color for general text */
+            --lighter: #FFFFFF; /* Pure white for prominent text/icons */
+            --gray: #888888; /* Mid-tone gray for subtle text */
+            --dark-gray: #444444; /* Darker gray for placeholders, borders */
+            --accent-glow: rgba(255, 51, 51, 0.7); /* Glow effect from primary-light with more transparency */
+            --secondary-accent: #FFD700; /* A subtle, elegant gold for secondary highlights */
+            --form-bg: rgba(18, 18, 18, 0.95); /* Adjusted form background for better contrast and elegance */
+            --input-bg: rgba(25, 25, 25, 0.9); /* Slightly lighter input background than form-bg */
+        }
+
+        /* --- Global Resets & Typography --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            color: var(--light);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            font-family: 'Montserrat', sans-serif;
+            background: var(--darker); /* Solid dark background for a sleeker look */
+            position: relative;
+            overflow-x: hidden;
+            overflow-y: auto;
+            /* Removed complex background animations for a cleaner, more elegant feel */
+        }
+
+        /* --- Subtle Background Elements (Simplified) --- */
+        body::before,
+        body::after {
+            content: '';
+            position: absolute;
+            background: radial-gradient(circle at center, var(--primary-light), transparent 70%);
+            opacity: 0.05; /* Very subtle glow */
+            pointer-events: none;
+            border-radius: 50%;
+            z-index: -1;
+        }
+
+        body::before {
+            width: 80vh;
+            height: 80vh;
+            top: -20vh;
+            left: -20vw;
+            animation: move-glow-one 20s ease-in-out infinite alternate;
+        }
+
+        body::after {
+            width: 70vh;
+            height: 70vh;
+            bottom: -15vh;
+            right: -15vw;
+            animation: move-glow-two 25s ease-in-out infinite alternate-reverse;
+        }
+
+        @keyframes move-glow-one {
+            0% { transform: translate(0, 0); opacity: 0.05; }
+            50% { transform: translate(10vw, 15vh); opacity: 0.08; }
+            100% { transform: translate(0, 0); opacity: 0.05; }
+        }
+
+        @keyframes move-glow-two {
+            0% { transform: translate(0, 0); opacity: 0.05; }
+            50% { transform: translate(-10vw, -15vh); opacity: 0.07; }
+            100% { transform: translate(0, 0); opacity: 0.05; }
+        }
+
+        /* --- Navbar --- */
+        .navbar {
+            background-color: var(--darker); /* Consistent with body background for sleekness */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6); /* Softer, but still present shadow */
+            padding: 1.5rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(var(--primary-light), 0.1); /* Subtle bottom border */
+            transition: all 0.3s ease;
+        }
+
+        .logo {
+            font-size: 2.2rem; /* Adjusted for a balanced look */
+            font-weight: 700;
+            font-family: 'Oswald', sans-serif;
+            color: var(--lighter);
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.3); /* Subtle white glow */
+            letter-spacing: 2px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.03);
+            text-shadow: 0 0 20px var(--primary-light); /* Red glow on hover */
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px; /* Thinner underline for elegance */
+            background: var(--primary-light);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.4s ease-out;
+        }
+
+        .logo:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .logo i {
+            margin-right: 12px;
+            color: var(--primary-light);
+            font-size: 1.8rem; /* Adjusted icon size */
+            filter: drop-shadow(0 0 8px var(--primary-light));
+            animation: none; /* Removed icon pulse animation for sleekness */
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--gray); /* Softer color for inactive links */
+            font-weight: 500; /* Medium weight */
+            transition: all 0.3s ease;
+            padding: 0.8rem 0;
+            position: relative;
+            font-size: 1rem;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px; /* Thinner underline */
+            background: var(--primary-light);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--lighter); /* White on hover */
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* --- Main Container --- */
+        .container {
+            max-width: 1200px; /* Reduced max-width for a more focused layout */
+            margin: 0 auto;
+            padding: 4rem 3rem; /* Balanced padding */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex: 1;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* --- Sign Up Card --- */
+        .signup-card {
+            background-color: var(--form-bg); /* Use new form background variable */
+            border-radius: 15px; /* Moderately rounded corners */
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.7); /* Deep, soft shadow */
+            padding: 3.5rem 3rem; /* Balanced padding */
+            width: 100%;
+            max-width: 500px; /* Optimal width for a sleek form */
+            backdrop-filter: blur(15px); /* Subtler blur */
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(var(--primary-light), 0.15); /* Very subtle, light border */
+            position: relative;
+            overflow: hidden;
+            transform: translateY(0);
+            transition: transform 0.4s ease-out, box-shadow 0.4s ease;
+        }
+
+        .signup-card:hover {
+            transform: translateY(-8px); /* Subtle lift on hover */
+            box-shadow: 0 20px 55px rgba(0, 0, 0, 0.9), 0 0 25px var(--accent-glow); /* Stronger shadow with glow */
+        }
+
+        /* Removed .signup-card::before animation for a cleaner look */
+        .signup-card::before {
+            content: '';
+            position: absolute;
+            top: -20%;
+            left: -20%;
+            width: 140%;
+            height: 140%;
+            background: radial-gradient(
+                circle,
+                rgba(var(--primary-light), 0.1), /* Very subtle radial glow */
+                transparent 60%
+            );
+            transform: rotate(30deg);
+            z-index: -1;
+            animation: none; /* Remove animation for sleekness */
+            opacity: 0.8;
+        }
+
+        /* --- Sign Up Header --- */
+        .signup-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .signup-header h2 {
+            color: var(--lighter);
+            margin-bottom: 1rem;
+            font-size: 2.5rem; /* Balanced title font size */
+            font-family: 'Oswald', sans-serif;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            text-shadow: 0 3px 10px rgba(0, 0, 0, 0.5); /* Refined text shadow */
+            position: relative;
+            display: inline-block;
+        }
+
+        .signup-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px; /* Slimmer underline */
+            height: 4px;
+            background: var(--primary); /* Solid primary color for underline */
+            border-radius: 2px;
+            box-shadow: 0 0 8px var(--primary-light); /* Subtle glow for underline */
+        }
+
+        .signup-header p {
+            color: var(--gray);
+            font-size: 1.05rem; /* Adjusted paragraph font size */
+            max-width: 90%;
+            margin: 0.8rem auto 0 auto; /* Adjusted top margin for better spacing */
+            line-height: 1.7;
+        }
+
+        .taekwondo-icon {
+            font-size: 3.5rem; /* Adjusted icon size for subtlety */
+            color: var(--primary-light);
+            margin-bottom: 2rem;
+            display: inline-block;
+            animation: none; /* Removed float-pulse animation for sleekness */
+            filter: drop-shadow(0 0 10px var(--accent-glow));
+        }
+
+        /* --- Messages --- */
+        .messages {
+            margin-bottom: 2rem;
+        }
+
+        .messages p {
+            padding: 1.2rem;
+            border-radius: 8px; /* Softer rounded corners */
+            margin-bottom: 1rem;
+            text-align: center;
+            font-weight: 500;
+            font-size: 1rem;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .messages .success {
+            background-color: rgba(76, 175, 80, 0.2); /* Softer green tint */
+            color: #C8E6C9; /* Lighter success text */
+            border: 1px solid rgba(76, 175, 80, 0.5);
+        }
+
+        .messages .error {
+            background-color: rgba(244, 67, 54, 0.2); /* Softer red tint */
+            color: #FFCDD2;
+            border: 1px solid rgba(244, 67, 54, 0.5);
+        }
+
+        /* --- Form Groups --- */
+        .form-group {
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.8rem;
+            color: var(--light); /* White/light for labels */
+            font-weight: 600;
+            font-size: 0.95rem; /* Slightly smaller label font */
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            text-shadow: none; /* Removed label text shadow for cleaner look */
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 1rem 1.2rem; /* Adjusted padding for a more compact input */
+            border: 1px solid var(--dark-gray); /* Subtle border color */
+            border-radius: 8px; /* Moderately rounded input fields */
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background-color: var(--input-bg); /* Use new input background variable */
+            color: var(--lighter);
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.4); /* Softer inner shadow */
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .form-group input::placeholder {
+            color: var(--dark-gray);
+            font-style: normal; /* Regular font style for placeholders */
+            opacity: 0.8;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            background-color: rgba(35, 35, 35, 0.95); /* Slightly darker on focus */
+            box-shadow: 0 0 0 2px var(--primary-light), inset 0 2px 5px rgba(0, 0, 0, 0.4); /* Slimmer, brighter focus ring */
+            border-color: var(--primary-light);
+            transform: scale(1.005); /* Very subtle scale on focus */
+        }
+
+        /* --- Password Strength Bar --- */
+        .password-strength {
+            height: 5px; /* Thinner strength bar */
+            background: var(--dark-gray);
+            border-radius: 2.5px;
+            margin-top: 0.8rem; /* Reduced space above */
+            overflow: hidden;
+            position: relative;
+        }
+
+        .password-strength::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: linear-gradient(90deg, #4CAF50, #FFEB3B, #F44336);
+            transition: width 0.4s ease-out;
+        }
+
+        /* Placeholder for actual password strength logic (JavaScript needed) */
+        /* .form-group input:focus + .password-strength::after {
+            width: 100%;
+        } */
+
+        /* --- Submit Button --- */
+        button[type="submit"] {
+            width: 100%;
+            padding: 1.2rem; /* Reduced padding for a more elegant button */
+            background: linear-gradient(135deg, var(--primary-light), var(--primary)); /* Vibrant gradient */
+            color: white;
+            border: none;
+            border-radius: 8px; /* Matches input border-radius */
+            font-size: 1.2rem; /* Adjusted font size */
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease-out; /* Smoother, faster transition */
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 1.5px; /* Balanced letter spacing */
+            box-shadow: 0 8px 25px rgba(183, 28, 28, 0.6); /* Refined shadow */
+            margin: 2.5rem 0 1.5rem; /* Adjusted margins */
+            perspective: none; /* Removed 3D perspective as it's not used visually here */
+        }
+
+        button[type="submit"]:hover {
+            transform: translateY(-5px); /* Subtle lift */
+            box-shadow: 0 12px 35px rgba(183, 28, 28, 0.8), 0 0 20px var(--accent-glow); /* Enhanced shadow with glow */
+            letter-spacing: 2px; /* Slightly increased letter spacing on hover */
+        }
+
+        button[type="submit"]::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -120%; /* Adjusted start position for shimmer */
+            width: 80%; /* Shorter shimmer width */
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.3), /* Subtler shimmer */
+                transparent
+            );
+            transition: all 0.6s ease; /* Faster shimmer */
+            transform: skewX(-20deg);
+        }
+
+        button[type="submit"]:hover::after {
+            left: 120%; /* Adjusted end position for shimmer */
+        }
+
+        button[type="submit"] i {
+            margin-right: 10px; /* Reduced margin for icon */
+        }
+
+        /* --- Login Link --- */
+        .login-link {
+            text-align: center;
+            color: var(--gray);
+            font-size: 0.95rem; /* Adjusted font size */
+            margin-top: 1rem;
+        }
+
+        .login-link a {
+            color: var(--primary-light);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+            padding-bottom: 2px;
+            text-shadow: none; /* Removed text shadow for a cleaner look */
+        }
+
+        .login-link a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px; /* Thinner underline */
+            background: var(--primary-light);
+            transition: width 0.3s ease;
+        }
+
+        .login-link a:hover {
+            color: var(--primary); /* Deeper red on hover */
+            text-shadow: 0 0 8px rgba(255, 51, 51, 0.3); /* Subtle glow on hover */
+        }
+
+        .login-link a:hover::after {
+            width: 100%;
+        }
+
+        /* --- Footer --- */
+        footer {
+            background-color: var(--darker); /* Consistent with body for seamlessness */
+            color: var(--gray);
+            text-align: center;
+            padding: 2rem; /* Reduced padding for a more compact footer */
+            position: relative;
+            z-index: 100;
+            border-top: 1px solid rgba(var(--primary), 0.1); /* Subtle top border */
+            font-size: 0.9rem;
+        }
+
+        .footer-content {
+            max-width: 1100px; /* Adjusted max-width */
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.5rem; /* Reduced gap */
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem; /* Reduced gap */
+        }
+
+        .social-links a {
+            color: var(--gray);
+            font-size: 1.4rem; /* Slightly smaller icons */
+            transition: color 0.3s ease, transform 0.2s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--primary-light);
+            transform: translateY(-3px) scale(1.1); /* Subtler lift and scale */
+            filter: drop-shadow(0 0 6px var(--primary-light));
+        }
+
+        /* --- Responsive Adjustments --- */
+        @media (max-width: 992px) {
+            .navbar {
+                padding: 1.2rem 3rem;
+            }
+            .logo {
+                font-size: 2rem;
+            }
+            .logo i {
+                font-size: 1.7rem;
+            }
+            .nav-links {
+                gap: 2rem;
+            }
+            .container {
+                padding: 3rem 2rem;
+            }
+            .signup-card {
+                padding: 3rem 2.5rem;
+                max-width: 450px;
+            }
+            .signup-header h2 {
+                font-size: 2.2rem;
+            }
+            .taekwondo-icon {
+                font-size: 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                padding: 1.5rem 1.5rem;
+            }
+            .logo {
+                margin-bottom: 1.5rem;
+                font-size: 1.8rem;
+            }
+            .logo i {
+                font-size: 1.6rem;
+            }
+            .nav-links {
+                margin-top: 1rem;
+                gap: 1.5rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .nav-links a {
+                font-size: 0.95rem;
+            }
+            .container {
+                padding: 2.5rem 1.5rem;
+            }
+            .signup-card {
+                padding: 2.5rem 2rem;
+                margin: 1rem;
+            }
+            .signup-header h2 {
+                font-size: 2rem;
+            }
+            .signup-header p {
+                font-size: 0.95rem;
+            }
+            .taekwondo-icon {
+                font-size: 2.8rem;
+            }
+            button[type="submit"] {
+                font-size: 1.1rem;
+                padding: 1rem;
+            }
+            .footer-content {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            .social-links {
+                gap: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar {
+                padding: 1rem;
+            }
+            .logo {
+                font-size: 1.6rem;
+                margin-bottom: 1rem;
+            }
+            .logo i {
+                font-size: 1.4rem;
+            }
+            .nav-links {
+                gap: 0.8rem;
+                font-size: 0.85rem;
+            }
+            .signup-card {
+                padding: 2rem 1.2rem;
+            }
+            .signup-header h2 {
+                font-size: 1.8rem;
+            }
+            .signup-header p {
+                font-size: 0.9rem;
+            }
+            .form-group label {
+                font-size: 0.85rem;
+            }
+            .form-group input {
+                padding: 1rem;
+                font-size: 0.9rem;
+            }
+            button[type="submit"] {
+                font-size: 1rem;
+                padding: 1rem;
+            }
+            .login-link {
+                font-size: 0.85rem;
+            }
+            footer {
+                padding: 1.5rem;
+                font-size: 0.8rem;
+            }
+            .social-links a {
+                font-size: 1.1rem;
+            }
+        }
+
+        /* Role Button Specific Styles (already good, just moved for context) */
+        .role-btn {
+            flex: 1;
+            padding: 1rem;
+            border: 2px solid #444;
+            background-color: transparent;
+            color: #fff;
+            cursor: pointer;
+            border-radius: 8px;
+            font-weight: 600;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+
+        .role-btn.selected {
+            border-color: var(--primary-light);
+            background-color: rgba(255, 51, 51, 0.1);
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        .role-btn:hover {
+            border-color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <i class="fas fa-fist-raised"></i> Digital Taekwondo </div>
+        <div class="nav-links">
+            <a href="{% url 'home' %}">Home</a>
+            <a href="#">Programs</a>
+            <a href="#">Instructors</a>
+            <a href="#">Testimonials</a>
+            <a href="{% url 'login' %}">Login</a>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <div class="signup-card">
+            <div class="signup-header">
+                <div class="taekwondo-icon">
+                    <i class="fas fa-medal"></i> 
+                </div>
+                <h2>Forge Your Path</h2> 
+                <p>Unlock your potential. Train with master instructors and become part of our elite digital dojang.</p> 
+            </div>
+            
+            {% for message in messages %}
+                <div class="messages">
+                    <p class="{{ message.tags }}">{{ message }}</p>
+                </div>
+            {% endfor %}
+            
+            <form method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label>Select Your Role</label>
+                    <div class="role-options" style="display: flex; gap: 1rem;">
+                        <button type="button" class="role-btn" data-role="athlete">Athlete</button>
+                        <button type="button" class="role-btn" data-role="coach">Coach</button>
+                    </div>
+                    <input type="hidden" id="roleInput" name="role" value="">
+                </div>
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" placeholder="Choose your unique warrior name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Your combat-ready email address" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Forge a formidable password" required>
+                    <div class="password-strength"></div>
+                </div>
+                <button type="submit">
+                    <i class="fas fa-dragon" style="margin-right: 12px;"></i> Enroll Now 
+                </button>
+            </form>
+            
+            <div class="login-link">
+                <p>Already a disciplined warrior? <a href="{% url 'login' %}">Enter the dojang</a></p>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2023 Digital Taekwondo Academy. All rights reserved. | <a href="#" style="color: var(--gray); text-decoration: none; transition: color 0.3s ease;">Privacy Policy</a></p> 
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-discord"></i></a> 
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    const roleButtons = document.querySelectorAll('.role-btn');
+    const roleInput = document.getElementById('roleInput');
+    const form = document.querySelector('form');
+
+    roleButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            roleButtons.forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+            roleInput.value = btn.dataset.role;
+            console.log('Role set in JS:', roleInput.value); // Added for your debugging
+        });
+    });
+
+    form.addEventListener('submit', function (e) {
+        if (!roleInput.value) {
+            e.preventDefault();
+            alert('Please select a role before submitting.');
+        }
+    });
+    </script>
+    </body>
+</html>

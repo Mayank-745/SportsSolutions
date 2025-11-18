@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Digital Taekwondo Academy</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', 'Segoe UI', sans-serif;
+        }
+        
+        body {
+            color: #f0f0f0;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: #121212 url('https://images.unsplash.com/photo-1540206395-68808572332f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center;
+            background-size: cover;
+            position: relative;
+        }
+        
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(18, 18, 18, 0.85);
+            z-index: 0;
+        }
+        
+        .navbar {
+            background-color: transparent;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #d32f2f;
+            text-shadow: 0 0 12px rgba(211, 47, 47, 0.7);
+            letter-spacing: 1px;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: #e0e0e0;
+            font-weight: 500;
+            transition: all 0.3s;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #d32f2f;
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #d32f2f;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex: 1;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .login-card {
+            background-color: rgba(40, 40, 40, 0.7);
+            border-radius: 12px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+            padding: 3rem;
+            width: 100%;
+            max-width: 450px;
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            border-top: 1px solid rgba(211, 47, 47, 0.4);
+            border-left: 1px solid rgba(211, 47, 47, 0.2);
+            text-align: center;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            transition: transform 0.5s, box-shadow 0.5s;
+        }
+        
+        .login-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 45px rgba(211, 47, 47, 0.3);
+        }
+        
+        .login-header {
+            margin-bottom: 2.5rem;
+            position: relative;
+        }
+        
+        .login-header h2 {
+            color: #fff;
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        .login-header p {
+            color: #aaa;
+            font-size: 0.95rem;
+        }
+        
+        .taekwondo-icon {
+            font-size: 2.5rem;
+            color: #d32f2f;
+            margin-bottom: 1rem;
+            display: inline-block;
+            transform: rotate(15deg);
+            text-shadow: 0 0 15px rgba(211, 47, 47, 0.5);
+        }
+        
+        .messages {
+            margin-bottom: 1.5rem;
+        }
+        
+        .messages p {
+            padding: 0.75rem;
+            border-radius: 4px;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+        
+        .messages .success {
+            background-color: rgba(46, 125, 50, 0.3);
+            color: #a5d6a7;
+            border: 1px solid rgba(46, 125, 50, 0.4);
+        }
+        
+        .messages .error {
+            background-color: rgba(198, 40, 40, 0.3);
+            color: #ef9a9a;
+            border: 1px solid rgba(198, 40, 40, 0.4);
+        }
+        
+        .form-group {
+            margin-bottom: 1.8rem;
+            position: relative;
+            text-align: left;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.7rem;
+            color: #d32f2f;
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 0.9rem 1.2rem;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: all 0.3s;
+            background-color: rgba(30, 30, 30, 0.8);
+            color: #f0f0f0;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .form-group input::placeholder {
+            color: #666;
+            font-style: italic;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            background-color: rgba(40, 40, 40, 0.9);
+            box-shadow: 0 0 0 2px rgba(211, 47, 47, 0.4), inset 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .forgot-password {
+            text-align: right;
+            margin: -1rem 0 1.8rem;
+        }
+        
+        .forgot-password a {
+            color: #888;
+            font-size: 0.85rem;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .forgot-password a:hover {
+            color: #d32f2f;
+        }
+        
+        button[type="submit"] {
+            width: 100%;
+            padding: 1rem;
+            background: #d32f2f;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            box-shadow: 0 4px 15px rgba(211, 47, 47, 0.4);
+            margin-bottom: 2rem;
+        }
+        
+        button[type="submit"]:hover {
+            background: #b71c1c;
+            letter-spacing: 2px;
+            box-shadow: 0 6px 20px rgba(183, 28, 28, 0.6);
+        }
+        
+        .signup-link {
+            text-align: center;
+            color: #888;
+            font-size: 0.95rem;
+        }
+        
+        .signup-link a {
+            color: #d32f2f;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .signup-link a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: #d32f2f;
+            transition: width 0.3s;
+        }
+        
+        .signup-link a:hover {
+            color: #f44336;
+        }
+        
+        .signup-link a:hover::after {
+            width: 100%;
+        }
+        
+        footer {
+            background-color: rgba(10, 10, 10, 0.9);
+            color: #777;
+            text-align: center;
+            padding: 1.5rem;
+            position: relative;
+            z-index: 10;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                padding: 1.2rem;
+            }
+            
+            .nav-links {
+                margin-top: 1.2rem;
+                gap: 1rem;
+            }
+            
+            .login-card {
+                padding: 2rem 1.5rem;
+                margin: 1rem;
+            }
+            
+            .login-header h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">Digital Taekwondo</div>
+        <div class="nav-links">
+            <a href="{% url 'home' %}">Home</a>
+            <a href="#">Classes</a>
+            <a href="#">Instructors</a>
+            <a href="{% url 'sign' %}">Sign Up</a>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <div class="login-card">
+            <div class="login-header">
+                <div class="taekwondo-icon">
+                    <i class="fas fa-user-ninja"></i>
+                </div>
+                <h2>Login</h2>
+                <p>Enter your credentials to continue your training</p>
+            </div>
+            
+            {% for message in messages %}
+                <div class="messages">
+                    <p class="{{ message.tags }}">{{ message }}</p>
+                </div>
+            {% endfor %}
+            
+            <form method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" placeholder="Your username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Your secret password" required>
+                </div>
+                <div class="forgot-password">
+                    <a href="#">Forgot your password?</a>
+                </div>
+                <button type="submit">
+                    <i class="fas fa-sign-in-alt" style="margin-right: 8px;"></i> Enter Dojang
+                </button>
+            </form>
+            
+            <div class="signup-link">
+                <p>New student? <a href="{% url 'sign' %}">Begin your journey</a></p>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        &copy; 2023 Digital Taekwondo Academy. All rights reserved.
+    </footer>
+</body>
+</html>

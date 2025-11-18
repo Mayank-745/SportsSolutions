@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SportsSolutions - Smarter Sports Management</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f8fafc;
+      color: #334155;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    header {
+      background: linear-gradient(135deg, #1e3a8a 0%, #172554 100%);
+      color: white;
+      padding: 4rem 2rem 3rem;
+      text-align: center;
+      position: relative;
+      clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+      padding-bottom: 6rem;
+      margin-bottom: -2rem;
+      overflow: hidden;
+    }
+
+    /* Animated background elements */
+    .header-bg-elements {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .bg-circle {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(96, 165, 250, 0.1);
+      animation: float 15s infinite ease-in-out;
+    }
+
+    .bg-circle:nth-child(1) {
+      width: 300px;
+      height: 300px;
+      top: -100px;
+      left: -100px;
+      animation-delay: 0s;
+    }
+
+    .bg-circle:nth-child(2) {
+      width: 200px;
+      height: 200px;
+      bottom: -50px;
+      right: -50px;
+      animation-delay: 2s;
+    }
+
+    .bg-circle:nth-child(3) {
+      width: 150px;
+      height: 150px;
+      top: 30%;
+      right: -50px;
+      animation-delay: 4s;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      25% { transform: translate(10px, 10px) rotate(5deg); }
+      50% { transform: translate(-10px, 5px) rotate(-5deg); }
+      75% { transform: translate(5px, -5px) rotate(3deg); }
+    }
+
+    /* Creative logo animation */
+    .logo-container {
+      display: inline-block;
+      position: relative;
+      margin-bottom: 1rem;
+      z-index: 2;
+    }
+
+    .brand {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 3.5rem;
+      font-weight: 700;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      margin-bottom: 0.5rem;
+      position: relative;
+      display: inline-block;
+      color: #fff; /* Default color for "Sports" */
+
+      /* Set initial state for the fadeInSlideUp animation */
+      opacity: 0; /* Starts invisible */
+      transform: translateY(30px); /* Starts below */
+
+      /* Apply the page-load animation */
+      /* This animation plays ONCE (no 'infinite') and stays at its final state ('forwards') */
+      animation: fadeInSlideUp 1s ease-out 0.5s forwards; /* 1s duration, 0.5s delay, stays at end */
+
+      /* Optional: Smooth transition for properties like color if they change directly */
+      transition: color 0.2s ease-in-out, text-shadow 0.2s ease-in-out;
+    }
+
+    /* Animated underline effect */
+    .brand::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, #60a5fa, #3b82f6);
+      transform: scaleX(0);
+      transform-origin: left;
+      animation: underlineGrow 1.5s 0.5s forwards cubic-bezier(0.19, 1, 0.22, 1);
+    }
+
+    @keyframes underlineGrow {
+      to { transform: scaleX(1); }
+    }
+
+    /* Pulse animation for the logo - No longer applied on hover, but can be used elsewhere */
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    /* New: Define the animation for page load */
+    @keyframes fadeInSlideUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px); /* Starts 30px below its final position */
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0); /* Ends at its normal position */
+        }
+    }
+
+    /* Sports icon animation */
+    .sports-icon {
+      position: absolute;
+      font-size: 1.5rem;
+      color: #60a5fa;
+      opacity: 0;
+      animation: sportsIcons 6s infinite;
+    }
+
+    .sports-icon:nth-child(1) {
+      top: -15px;
+      left: -20px;
+      animation-delay: 0.5s;
+    }
+
+    .sports-icon:nth-child(2) {
+      top: -15px;
+      right: -20px;
+      animation-delay: 1s;
+    }
+
+    .sports-icon:nth-child(3) {
+      bottom: -15px;
+      left: 30%;
+      animation-delay: 1.5s;
+    }
+
+    @keyframes sportsIcons {
+      0%, 100% {
+        opacity: 0;
+        transform: translateY(10px) rotate(0deg);
+      }
+      20%, 80% {
+        opacity: 1;
+        transform: translateY(0) rotate(360deg);
+      }
+    }
+
+    header p {
+      font-size: 1.3rem;
+      margin-top: 0.5rem;
+      opacity: 0.9;
+      font-weight: 300;
+      max-width: 600px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Enhanced Hamburger Menu */
+    .hamburger {
+      font-size: 1.8rem;
+      cursor: pointer;
+      position: fixed;
+      top: 1.5rem;
+      left: 1.5rem;
+      z-index: 1001;
+      color: white;
+      background: rgba(30, 58, 138, 0.7);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .hamburger:hover {
+      background: rgba(30, 58, 138, 0.9);
+      transform: scale(1.1) rotate(90deg);
+      box-shadow: 0 0 15px rgba(96, 165, 250, 0.5);
+    }
+
+    /* Enhanced Sidebar Panel */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: -300px;
+      width: 300px;
+      height: 100%;
+      background: rgba(15, 23, 42, 0.95);
+      color: white;
+      padding: 5rem 1.5rem 2rem;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 1000;
+      box-shadow: 5px 0 30px rgba(0,0,0,0.3);
+      backdrop-filter: blur(10px);
+      border-right: 1px solid rgba(96, 165, 250, 0.2);
+    }
+
+    .sidebar.active {
+      left: 0;
+    }
+
+    .sidebar a {
+      color: #e2e8f0;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      padding: 1rem;
+      font-size: 1.1rem;
+      border-radius: 6px;
+      margin-bottom: 0.5rem;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .sidebar a::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(to bottom, #60a5fa, #3b82f6);
+      transform: scaleY(0);
+      transition: transform 0.3s ease;
+      transform-origin: bottom;
+    }
+
+    .sidebar a:hover {
+      background: rgba(96, 165, 250, 0.1);
+      color: #ffffff;
+      padding-left: 1.5rem;
+      transform: translateX(5px);
+    }
+
+    .sidebar a:hover::before {
+      transform: scaleY(1);
+    }
+
+    .sidebar a i {
+      margin-right: 10px;
+      width: 20px;
+      text-align: center;
+      font-size: 1.2rem;
+    }
+
+    /* Section styles */
+    .section {
+      padding: 5rem 2rem;
+      max-width: 1200px;
+      margin: auto;
+      position: relative;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 3rem;
+      position: relative;
+      font-size: 2.5rem;
+      color: #1e3a8a;
+      font-weight: 700;
+    }
+
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, #60a5fa, #3b82f6);
+      margin: 1rem auto;
+      border-radius: 2px;
+      animation: underlineGrow 1s forwards;
+    }
+
+    /* Feature cards with enhanced animations */
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+      perspective: 1000px;
+    }
+
+    .feature-card {
+      background: white;
+      padding: 2.5rem;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      flex: 1 1 300px;
+      text-align: center;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      text-decoration: none;
+      color: inherit;
+      border: 1px solid rgba(226, 232, 240, 0.7);
+      position: relative;
+      overflow: hidden;
+      transform-style: preserve-3d;
+      will-change: transform;
+    }
+
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(90deg, #60a5fa, #3b82f6);
+      transition: all 0.3s ease;
+    }
+
+    .feature-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 0;
+      background: linear-gradient(135deg, rgba(30, 58, 138, 0.05) 0%, rgba(59, 130, 246, 0.05) 100%);
+      transition: height 0.3s ease;
+      z-index: -1;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-10px) rotateX(5deg);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+      border-color: rgba(96, 165, 250, 0.5);
+    }
+
+    .feature-card:hover::before {
+      height: 8px;
+    }
+
+    .feature-card:hover::after {
+      height: 100%;
+    }
+
+    .feature-card h3 {
+      color: #1e3a8a;
+      margin-bottom: 1.5rem;
+      font-size: 1.6rem;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    .feature-card:hover h3 {
+      color: #3b82f6;
+    }
+
+    .feature-card p {
+      color: #64748b;
+      margin-bottom: 1.5rem;
+      transition: color 0.3s ease;
+    }
+
+    .feature-card:hover p {
+      color: #475569;
+    }
+
+    .feature-icon {
+      font-size: 3rem;
+      color: #3b82f6;
+      margin-bottom: 1.5rem;
+      display: inline-block;
+      transition: all 0.4s ease;
+    }
+
+    .feature-card:hover .feature-icon {
+      transform: scale(1.2) rotate(10deg);
+      color: #2563eb;
+    }
+
+    /* Enhanced buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+      color: white;
+      padding: 0.9rem 2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: 0.5s;
+    }
+
+    .btn:hover {
+      background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
+    }
+
+    .btn:hover::before {
+      left: 100%;
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 2px solid #3b82f6;
+      color: #3b82f6;
+      box-shadow: none;
+    }
+
+    .btn-outline:hover {
+      background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+      color: white;
+      border-color: transparent;
+    }
+
+    /* About section enhancements */
+    .about-content {
+      background: white;
+      padding: 3rem;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+      border: 1px solid rgba(226, 232, 240, 0.7);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-content::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(90deg, #60a5fa, #3b82f6);
+    }
+
+    .about-content p {
+      margin-bottom: 1.5rem;
+      line-height: 1.8;
+      color: #475569;
+    }
+
+    /* Footer enhancements */
+    footer {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: white;
+      padding: 5rem 2rem;
+      text-align: center;
+      clip-path: polygon(0 10%, 100% 0, 100% 95%, 0% 100%);
+      margin-top: 4rem;
+      position: relative;
+    }
+
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #60a5fa, transparent);
+    }
+
+    .footer-content {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin: 2rem 0;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: #e2e8f0;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .footer-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #60a5fa;
+      transition: width 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: #60a5fa;
+    }
+
+    .footer-links a:hover::after {
+      width: 100%;
+    }
+
+    .social-links {
+      margin: 2rem 0;
+    }
+
+    .social-links a {
+      color: white;
+      background: rgba(255,255,255,0.1);
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 0.5rem;
+      transition: all 0.3s ease;
+      font-size: 1.2rem;
+    }
+
+    .social-links a:hover {
+      background: #3b82f6;
+      transform: translateY(-5px) scale(1.1);
+      box-shadow: 0 5px 15px rgba(59, 130, 246, 0.4);
+    }
+
+    .copyright {
+      margin-top: 2rem;
+      opacity: 0.7;
+      font-size: 0.9rem;
+    }
+
+    /* Scroll animation */
+    .animate-on-scroll {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease;
+    }
+
+    .animate-on-scroll.animated {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Responsive styles */
+    @media (max-width: 768px) {
+      .brand {
+        font-size: 2.5rem;
+        margin-top: 1rem;
+      }
+
+      header p {
+        font-size: 1.1rem;
+      }
+
+      .section {
+        padding: 3rem 1.5rem;
+      }
+
+      .feature-card {
+        flex: 1 1 100%;
+      }
+
+      .section-title {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="sidebar" id="sidebar">
+    <a href="#"><i class="fas fa-home"></i> Home</a>
+    <a href="#services"><i class="fas fa-cogs"></i> Services</a>
+    <a href="#about"><i class="fas fa-info-circle"></i> About Us</a>
+    <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
+  </div>
+
+  <div class="hamburger" onclick="toggleSidebar()">☰</div>
+
+  <header>
+    <div class="header-bg-elements">
+      <div class="bg-circle"></div>
+      <div class="bg-circle"></div>
+      <div class="bg-circle"></div>
+    </div>
+
+    <div class="logo-container">
+      <h1 class="brand animate__animated animate__fadeInDown">Sports<span>Solutions</span></h1>
+      <i class="fas fa-football-ball sports-icon"></i>
+      <i class="fas fa-running sports-icon"></i>
+      <i class="fas fa-basketball-ball sports-icon"></i>
+    </div>
+    <p class="animate__animated animate__fadeIn animate__delay-1s">Revolutionizing sports management with cutting-edge technology and data-driven insights</p>
+  </header>
+
+  <section class="section" id="services">
+    <h2 class="section-title animate-on-scroll">Our Services</h2>
+    <div class="features">
+      <a href="/lms" class="feature-card animate-on-scroll" style="transition-delay: 0.1s">
+        <div class="feature-icon">
+          <i class=""></i>
+        </div>
+        <h3>Service A</h3>
+        <p>about a</p>
+        <div class="btn btn-outline">Learn More</div>
+      </a>
+      <a href="#" class="feature-card animate-on-scroll" style="transition-delay: 0.2s">
+        <div class="feature-icon">
+          <i class=""></i>
+        </div>
+        <h3>Service B</h3>
+        <p>about b</p>
+        <div class="btn btn-outline">Learn More</div>
+      </a>
+      <a href="#" class="feature-card animate-on-scroll" style="transition-delay: 0.3s">
+        <div class="feature-icon">
+          <i class=""></i>
+        </div>
+        <h3>Service C</h3>
+        <p>about c</p>
+        <div class="btn btn-outline">Learn More</div>
+      </a>
+    </div>
+  </section>
+
+  <section class="section" id="about">
+    <h2 class="section-title animate-on-scroll">About Us</h2>
+    <div class="about-content animate-on-scroll">
+      <p>some text</p>
+      <p>some more text</p>
+      <a href="#" class="btn">
+        <i class="fas fa-users"></i> Meet Our Team
+      </a>
+    </div>
+  </section>
+
+  <section class="section" id="contact" style="padding-top: 0;">
+    <h2 class="section-title animate-on-scroll">Get In Touch</h2>
+    <div class="about-content animate-on-scroll">
+      <p>some text related to contact</p>
+      <a href="" class="btn">
+        <i class="fas fa-envelope"></i> Contact Us
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-content">
+      <p>Smarter Sports Management</p>
+
+      <div class="footer-links">
+        <a href="#">Home</a>
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms</a>
+      </div>
+
+      <div class="social-links">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+      </div>
+
+      <div class="copyright">
+        
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function toggleSidebar() {
+      document.getElementById('sidebar').classList.toggle('active');
+    }
+
+    // Close sidebar when clicking outside
+    document.addEventListener('click', function(event) {
+      const sidebar = document.getElementById('sidebar');
+      const hamburger = document.querySelector('.hamburger');
+
+      if (sidebar.classList.contains('active') &&
+          !sidebar.contains(event.target) &&
+          event.target !== hamburger) {
+        sidebar.classList.remove('active');
+      }
+    });
+
+    // Scroll animation
+    const animateElements = document.querySelectorAll('.animate-on-scroll');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animated');
+        }
+      });
+    }, {
+      threshold: 0.1
+    });
+
+    animateElements.forEach(element => {
+      observer.observe(element);
+    });
+  </script>
+</body>
+</html>

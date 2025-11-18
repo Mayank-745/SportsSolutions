@@ -1,0 +1,3331 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Taekwondo Academy - Learning Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ============================= */
+        /* Balanced Design System */
+        /* ============================= */
+        :root {
+  --primary: #ffffff;
+  --primary-dark: #cccccc;
+  --primary-light: #eeeeee;
+
+  --accent-orange: #dddddd;
+  --accent-orange-dark: #bbbbbb;
+  --accent-emerald: #aaaaaa;
+  --accent-emerald-dark: #999999;
+  --accent-purple: #888888;
+  --accent-cyan: #777777;
+
+  --bg-primary: #000000;
+  --bg-secondary: #0a0a0a;
+  --bg-tertiary: #121212;
+  --bg-card: rgba(255, 255, 255, 0.04);
+  --bg-card-hover: rgba(255, 255, 255, 0.08);
+
+  --text-primary: #ffffff;
+  --text-secondary: #cccccc;
+  --text-muted: #888888;
+  --text-disabled: #666666;
+            
+            /* Refined Text Colors */
+            --text-primary: #ffffff;
+            --text-secondary: #f1f5f9;
+            --text-muted: #94a3b8;
+            --text-disabled: #64748b;
+            
+            /* Elegant Border Colors */
+            --border-primary: rgba(255, 255, 255, 0.08);
+            --border-secondary: rgba(255, 255, 255, 0.12);
+            --border-accent: rgba(99, 102, 241, 0.3);
+            --border-glow: rgba(99, 102, 241, 0.5);
+            
+            /* Sophisticated Effects */
+  --glow-primary: rgba(255, 255, 255, 0.1);
+  --glow-orange: rgba(255, 255, 255, 0.08);
+  --glow-emerald: rgba(255, 255, 255, 0.08);
+  --glow-purple: rgba(255, 255, 255, 0.08);
+  --glow-cyan: rgba(255, 255, 255, 0.08);
+            
+            /* Typography */
+            --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-family-heading: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+            
+            /* Refined Spacing */
+            --space-xs: 0.25rem;
+            --space-sm: 0.5rem;
+            --space-md: 1rem;
+            --space-lg: 1.5rem;
+            --space-xl: 2rem;
+            --space-2xl: 3rem;
+            --space-3xl: 4rem;
+            
+            /* Modern Border Radius */
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 14px;
+            --radius-xl: 20px;
+            --radius-2xl: 28px;
+            
+            /* Premium Shadows */
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
+            --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15), 0 10px 10px rgba(0, 0, 0, 0.04);
+            --shadow-glow: 0 0 20px var(--glow-primary);
+            --shadow-glow-lg: 0 0 40px var(--glow-primary);
+            
+            /* Smooth Transitions */
+            --transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* ============================= */
+        /* Global Styles */
+        /* ============================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 100px;
+        }
+
+        body {
+            
+            font-family: var(--font-family);
+            background: 
+                radial-gradient(ellipse at top left, rgba(255, 255, 255, 0.03) 0%, transparent 50%),
+                radial-gradient(ellipse at top right, rgba(255, 255, 255, 0.02) 0%, transparent 50%),
+                radial-gradient(ellipse at bottom left, rgba(255, 255, 255, 0.015) 0%, transparent 50%),
+                linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 50%, #0a0a0f 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Enhanced animated background pattern */
+
+
+        /* Enhanced floating particles animation */
+
+
+        /* Enhanced background animations */
+        @keyframes backgroundShift {
+            0%, 100% {
+                background: 
+                    radial-gradient(circle at 20% 80%, var(--glow-primary) 0%, transparent 70%),
+                    radial-gradient(circle at 80% 20%, var(--glow-purple) 0%, transparent 70%),
+                    radial-gradient(circle at 40% 40%, var(--glow-emerald) 0%, transparent 60%),
+                    radial-gradient(circle at 60% 80%, var(--glow-cyan) 0%, transparent 60%);
+                transform: rotate(0deg) scale(1);
+            }
+            25% {
+                background: 
+                    radial-gradient(circle at 80% 60%, var(--glow-emerald) 0%, transparent 70%),
+                    radial-gradient(circle at 30% 40%, var(--glow-primary) 0%, transparent 70%),
+                    radial-gradient(circle at 70% 80%, var(--glow-cyan) 0%, transparent 60%),
+                    radial-gradient(circle at 20% 20%, var(--glow-purple) 0%, transparent 60%);
+                transform: rotate(90deg) scale(1.05);
+            }
+            50% {
+                background: 
+                    radial-gradient(circle at 60% 20%, var(--glow-cyan) 0%, transparent 70%),
+                    radial-gradient(circle at 20% 70%, var(--glow-emerald) 0%, transparent 70%),
+                    radial-gradient(circle at 90% 50%, var(--glow-primary) 0%, transparent 60%),
+                    radial-gradient(circle at 40% 90%, var(--glow-purple) 0%, transparent 60%);
+                transform: rotate(180deg) scale(1);
+            }
+            75% {
+                background: 
+                    radial-gradient(circle at 40% 90%, var(--glow-purple) 0%, transparent 70%),
+                    radial-gradient(circle at 70% 30%, var(--glow-cyan) 0%, transparent 70%),
+                    radial-gradient(circle at 10% 60%, var(--glow-emerald) 0%, transparent 60%),
+                    radial-gradient(circle at 80% 80%, var(--glow-primary) 0%, transparent 60%);
+                transform: rotate(270deg) scale(1.05);
+            }
+        }
+
+@keyframes starDrift {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 1000px 1000px;
+    }
+}
+
+
+        /* Enhanced geometric shapes animation */
+        .animated-shapes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .shape {
+            position: absolute;
+            opacity: 0.12;
+            animation: float 20s ease-in-out infinite;
+            filter: blur(0.5px);
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg) scale(1);
+                opacity: 0.12;
+                filter: blur(0.5px);
+            }
+            25% {
+                transform: translateY(-40px) rotate(90deg) scale(1.15);
+                opacity: 0.25;
+                filter: blur(0px);
+            }
+            50% {
+                transform: translateY(-25px) rotate(180deg) scale(0.85);
+                opacity: 0.18;
+                filter: blur(1px);
+            }
+            75% {
+                transform: translateY(-50px) rotate(270deg) scale(1.08);
+                opacity: 0.3;
+                filter: blur(0.2px);
+            }
+        }
+
+        .shape:nth-child(1) {
+            top: 10%;
+            left: 10%;
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 50%, var(--accent-purple) 100%);
+            border-radius: 50%;
+            animation: float 25s ease-in-out infinite;
+            animation-delay: 0s;
+            box-shadow: 0 0 40px var(--glow-primary);
+        }
+
+        .shape:nth-child(2) {
+            top: 60%;
+            right: 15%;
+            width: 90px;
+            height: 90px;
+            background: linear-gradient(135deg, var(--accent-orange) 0%, var(--accent-orange-dark) 50%, var(--primary) 100%);
+            transform: rotate(45deg);
+            animation: float 22s ease-in-out infinite;
+            animation-delay: 5s;
+            box-shadow: 0 0 35px var(--glow-orange);
+            border-radius: var(--radius-lg);
+        }
+
+        .shape:nth-child(3) {
+            bottom: 20%;
+            left: 20%;
+            width: 140px;
+            height: 140px;
+            background: linear-gradient(135deg, var(--accent-emerald) 0%, var(--accent-emerald-dark) 50%, var(--accent-cyan) 100%);
+            border-radius: 30%;
+            animation: float 28s ease-in-out infinite;
+            animation-delay: 10s;
+            box-shadow: 0 0 45px var(--glow-emerald);
+        }
+
+        .shape:nth-child(4) {
+            top: 30%;
+            right: 30%;
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--accent-purple) 0%, var(--primary-light) 50%, var(--primary) 100%);
+            border-radius: 50%;
+            animation: float 20s ease-in-out infinite;
+            animation-delay: 7s;
+            box-shadow: 0 0 30px var(--glow-purple);
+        }
+
+        .shape:nth-child(5) {
+            top: 70%;
+            left: 60%;
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-emerald) 50%, var(--primary) 100%);
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            animation: float 24s ease-in-out infinite;
+            animation-delay: 12s;
+            box-shadow: 0 0 35px var(--glow-cyan);
+        }
+
+        .shape:nth-child(6) {
+            bottom: 40%;
+            right: 50%;
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--accent-purple) 50%, var(--accent-emerald) 100%);
+            border-radius: 25%;
+            animation: float 26s ease-in-out infinite;
+            animation-delay: 15s;
+            box-shadow: 0 0 30px rgba(168, 85, 247, 0.4);
+        }}
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg) scale(1);
+                opacity: 0.15;
+            }
+            25% {
+                transform: translateY(-30px) rotate(90deg) scale(1.1);
+                opacity: 0.25;
+            }
+            50% {
+                transform: translateY(-20px) rotate(180deg) scale(0.9);
+                opacity: 0.2;
+            }
+            75% {
+                transform: translateY(-40px) rotate(270deg) scale(1.05);
+                opacity: 0.3;
+            }
+        }
+
+
+
+        /* Selection styling */
+        ::selection {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-secondary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-light);
+        }
+
+        /* ============================= */
+        /* Header */
+        /* ============================= */
+        .header {
+            background: rgba(17, 24, 39, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-primary);
+            padding: var(--space-lg) 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 var(--space-xl);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--space-lg);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: var(--space-lg);
+            transition: transform var(--transition);
+        }
+
+        .logo:hover {
+            transform: translateY(-1px);
+        }
+
+        .logo h1 {
+            font-family: var(--font-family-heading);
+            font-size: 1.875rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: -0.75px;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--primary-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .logo i {
+            font-size: 2.25rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            transition: transform var(--transition);
+            filter: drop-shadow(0 0 10px var(--glow-primary));
+        }
+
+        .logo:hover i {
+            transform: rotate(8deg) scale(1.05);
+        }
+
+        .tagline {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-top: 2px;
+        }
+
+        .nav {
+            display: flex;
+            gap: var(--space-xl);
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            padding: var(--space-md) var(--space-lg);
+            border-radius: var(--radius-lg);
+            transition: all var(--transition);
+            position: relative;
+            font-size: 0.875rem;
+            letter-spacing: 0.25px;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: var(--radius-lg);
+            background: var(--bg-glass);
+            transition: all var(--transition);
+            z-index: -1;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--primary-light) 100%);
+            border-radius: 2px;
+            transition: width var(--transition);
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--text-primary);
+            transform: translateY(-1px);
+        }
+
+        .nav-link:hover::before,
+        .nav-link.active::before {
+            background: var(--bg-glass-hover);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 70%;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            padding: var(--space-md) var(--space-lg);
+            background: var(--bg-glass);
+            border-radius: var(--radius-xl);
+            border: 1px solid var(--border-secondary);
+            transition: all var(--transition);
+            backdrop-filter: blur(20px);
+        }
+
+        .user-info:hover {
+            border-color: var(--border-glow);
+            box-shadow: var(--shadow-glow);
+            transform: translateY(-1px);
+        }
+
+        .user-role {
+            background: rgb(0,0,0);
+            color: white;
+            padding: var(--space-sm) var(--space-md);
+            border-radius: var(--radius-md);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* ============================= */
+        /* Main Content */
+        /* ============================= */
+        .main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--space-3xl) var(--space-lg);
+        }
+
+        /* Welcome Section */
+        .welcome-section {
+            text-align: center;
+            margin-bottom: var(--space-3xl);
+            padding: var(--space-2xl);
+            background: var(--bg-card);
+            border-radius: var(--radius-xl);
+            border: 1px solid var(--border-secondary);
+            box-shadow: var(--shadow-lg);
+            transition: transform var(--transition);
+        }
+
+        .welcome-section:hover {
+            transform: translateY(-4px);
+        }
+
+        .welcome-title {
+            font-family: var(--font-family-heading);
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            margin-bottom: var(--space-lg);
+            color: var(--text-primary);
+            line-height: 1.2;
+        }
+
+        .welcome-description {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* Courses Section */
+        .courses-section {
+            margin-bottom: var(--space-3xl);
+        }
+
+        .section-title {
+            font-family: var(--font-family-heading);
+            font-size: 2.2rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: var(--space-2xl);
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        .courses-container {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-xl);
+        }
+
+        /* Course Card */
+        .course-card {
+            background: var(--bg-glass);
+            backdrop-filter: blur(20px);
+            border-radius: var(--radius-2xl);
+            border: 1px solid var(--border-primary);
+            overflow: hidden;
+            transition: all var(--transition-slow);
+            box-shadow: var(--shadow-lg);
+            position: relative;
+        }
+
+        .course-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: var(--radius-2xl);
+            padding: 1px;
+            background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0.1) 0%, 
+                transparent 50%, 
+                rgba(255, 255, 255, 0.05) 100%);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: xor;
+            transition: all var(--transition);
+        }
+
+        .course-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-xl);
+            border-color: var(--border-glow);
+        }
+
+        .course-card:hover::before {
+            background: linear-gradient(135deg, 
+                rgba(99, 102, 241, 0.3) 0%, 
+                transparent 50%, 
+                rgba(99, 102, 241, 0.1) 100%);
+        }
+
+        .course-header {
+            padding: var(--space-2xl);
+            border-bottom: 1px solid var(--border-primary);
+            background: var(--bg-glass-hover);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .course-info h3 {
+            font-family: var(--font-family-heading);
+            font-size: 1.625rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: var(--space-md);
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            letter-spacing: -0.5px;
+        }
+
+        .course-description {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-weight: 400;
+        }
+
+        /* Course Actions */
+        .course-actions {
+            padding: var(--space-xl);
+            display: flex;
+            gap: var(--space-lg);
+            background: var(--bg-glass);
+            backdrop-filter: blur(10px);
+        }
+
+        .action-btn {
+            flex: 1;
+            padding: var(--space-lg) var(--space-xl);
+            border: none;
+            border-radius: var(--radius-lg);
+            font-size: 0.875rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: all var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-md);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .action-btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: var(--radius-lg);
+            padding: 1px;
+            background: linear-gradient(135deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: xor;
+            transition: all var(--transition);
+        }
+
+        .details-btn {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: var(--text-primary);
+            box-shadow: var(--shadow-md);
+        }
+
+        .details-btn:hover {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .lessons-btn {
+            background: linear-gradient(135deg, var(--accent-orange) 0%, var(--accent-orange-dark) 100%);
+            color: var(--text-primary);
+            box-shadow: var(--shadow-md);
+        }
+
+        .lessons-btn:hover {
+            background: linear-gradient(135deg, var(--accent-orange-dark) 0%, var(--accent-orange) 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px var(--glow-orange);
+        }
+
+        .action-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none !important;
+            background: var(--bg-tertiary) !important;
+            box-shadow: none !important;
+        }
+
+        /* Dropdown Containers */
+        .details-container,
+        .lessons-container {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+            background: var(--bg-tertiary);
+        }
+
+        .course-card.details-expanded .details-container {
+            max-height: 500px;
+        }
+
+        .course-card.lessons-expanded .lessons-container {
+            max-height: 1000px;
+        }
+
+        /* Course Details */
+        .course-details {
+            padding: var(--space-xl);
+        }
+
+        .detail-item {
+            margin-bottom: var(--space-lg);
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: var(--space-xs);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+
+        .detail-value {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .detail-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: var(--space-md);
+            margin-top: var(--space-lg);
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: var(--space-md);
+            background: var(--bg-card);
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-primary);
+        }
+
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-light);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Lessons List */
+        .lessons-list {
+            padding: var(--space-xl);
+            display: grid;
+            gap: var(--space-lg);
+        }
+
+        .lesson-item {
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding: var(--space-lg) var(--space-xl);
+            border-radius: var(--radius-lg);
+            transition: all var(--transition);
+            background: var(--bg-card);
+            border: 1px solid var(--border-primary);
+            min-height: 80px;
+        }
+
+        .lesson-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--border-secondary);
+            transition: all var(--transition);
+            border-top-left-radius: var(--radius-lg);
+            border-bottom-left-radius: var(--radius-lg);
+        }
+
+        .lesson-item.unlocked {
+            border-color: var(--accent-emerald);
+        }
+
+        .lesson-item.unlocked::before {
+            background: var(--accent-emerald);
+        }
+
+        .lesson-item.unlocked:hover {
+            transform: translateX(8px);
+            box-shadow: var(--shadow-md);
+            background: var(--bg-card-hover);
+        }
+
+        .lesson-item.locked {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .lesson-item.completed {
+            background: linear-gradient(135deg, var(--accent-emerald), var(--accent-emerald-dark));
+            color: var(--text-primary);
+            border-color: var(--accent-emerald);
+        }
+
+        .lesson-item.completed::before {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .lesson-status {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: var(--space-xl);
+            font-weight: 700;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+            transition: all var(--transition);
+        }
+
+        .lesson-item.unlocked .lesson-status {
+            background: var(--accent-emerald);
+            color: var(--text-primary);
+        }
+
+        .lesson-item.locked .lesson-status {
+            background: var(--bg-tertiary);
+            color: var(--text-disabled);
+            border: 2px solid var(--border-primary);
+        }
+
+        .lesson-item.completed .lesson-status {
+            background: rgba(255, 255, 255, 0.2);
+            color: var(--text-primary);
+        }
+
+        .lesson-content {
+            flex: 1;
+            min-width: 0; /* Allows text to wrap properly */
+        }
+
+        .lesson-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
+            color: inherit;
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            line-height: 1.4;
+        }
+
+        .lesson-description {
+            font-size: 1rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        .lesson-item.completed .lesson-description {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .lesson-item.locked .lesson-description {
+            color: var(--text-disabled);
+        }
+
+        /* ============================= */
+        /* Video Modal Styles */
+        /* ============================= */
+        .video-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity var(--transition), visibility var(--transition);
+            padding: var(--space-lg);
+        }
+
+        .video-modal-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .video-modal-content {
+            background: var(--bg-card);
+            border-radius: var(--radius-xl);
+            padding: var(--space-xl);
+            width: 100%;
+            max-width: 900px;
+            max-height: 90vh;
+            box-shadow: var(--shadow-xl);
+            transform: scale(0.9);
+            transition: transform var(--transition);
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-lg);
+            border: 1px solid var(--border-primary);
+            overflow-y: auto;
+        }
+
+        .video-modal-overlay.open .video-modal-content {
+            transform: scale(1);
+        }
+
+        .video-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: var(--space-md);
+            gap: var(--space-lg);
+        }
+
+        .video-modal-title {
+            font-family: var(--font-family-heading);
+            font-size: 1.8rem;
+            color: var(--text-primary);
+            line-height: 1.3;
+            flex: 1;
+        }
+
+        .video-modal-close {
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: color var(--transition);
+            flex-shrink: 0;
+            padding: var(--space-xs);
+            border-radius: var(--radius-sm);
+        }
+
+        .video-modal-close:hover {
+            color: var(--text-primary);
+            background: var(--bg-tertiary);
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            background: var(--bg-primary);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            border: 1px solid var(--border-secondary);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: var(--space-md);
+            margin-top: var(--space-lg);
+            flex-wrap: wrap;
+        }
+
+        .modal-btn {
+            padding: var(--space-md) var(--space-lg);
+            border-radius: var(--radius-md);
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: all var(--transition);
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            white-space: nowrap;
+        }
+
+        .modal-btn.mark-completed {
+            background: var(--accent-emerald);
+            color: var(--text-primary);
+            border: none;
+        }
+
+        .modal-btn.mark-completed:hover {
+            background: var(--accent-emerald-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px var(--glow-emerald);
+        }
+
+        .modal-btn.unmark-completed {
+            background: var(--accent-orange);
+            color: var(--text-primary);
+            border: none;
+        }
+
+        .modal-btn.unmark-completed:hover {
+            background: var(--accent-orange-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px var(--glow-orange);
+        }
+
+        .modal-btn.close-btn {
+            background: var(--bg-tertiary);
+            color: var(--text-secondary);
+            border: 1px solid var(--border-primary);
+        }
+
+        .modal-btn.close-btn:hover {
+            background: var(--bg-card-hover);
+            transform: translateY(-2px);
+        }
+
+        /* ============================= */
+        /* Responsive Design */
+        /* ============================= */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: var(--space-md);
+            }
+
+            .nav {
+                gap: var(--space-md);
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .main {
+                padding: var(--space-2xl) var(--space-md);
+            }
+
+            .welcome-section {
+                padding: var(--space-xl) var(--space-lg);
+            }
+
+            .course-actions {
+                flex-direction: column;
+            }
+
+            .detail-stats {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            /* Improved mobile video modal */
+            .video-modal-overlay {
+                padding: var(--space-md);
+            }
+
+            .video-modal-content {
+                width: 100%;
+                max-width: none;
+                padding: var(--space-lg);
+                max-height: 95vh;
+            }
+
+            .video-modal-title {
+                font-size: 1.4rem;
+                line-height: 1.2;
+            }
+
+            .modal-actions {
+                justify-content: center;
+                gap: var(--space-sm);
+            }
+
+            .modal-btn {
+                flex: 1;
+                min-width: 0;
+                justify-content: center;
+                font-size: 0.8rem;
+                padding: var(--space-sm) var(--space-md);
+            }
+
+            /* Improved mobile lesson layout */
+            .lessons-list {
+                padding: var(--space-lg);
+                gap: var(--space-md);
+            }
+
+            .lesson-item {
+                padding: var(--space-md) var(--space-lg);
+                min-height: 70px;
+                flex-direction: row;
+                align-items: flex-start;
+            }
+
+            .lesson-status {
+                width: 40px;
+                height: 40px;
+                margin-right: var(--space-lg);
+                font-size: 1rem;
+                margin-top: var(--space-xs);
+            }
+
+            .lesson-title {
+                font-size: 1.1rem;
+                margin-bottom: var(--space-xs);
+                flex-wrap: wrap;
+            }
+
+            .lesson-description {
+                font-size: 0.9rem;
+                line-height: 1.5;
+            }
+
+            /* Better mobile course header layout */
+            .course-header {
+                flex-direction: column;
+                gap: var(--space-lg);
+                align-items: stretch;
+            }
+
+            .unlock-container {
+                align-self: center;
+            }
+
+            .unlock-btn {
+                width: 100%;
+                max-width: 280px;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .lesson-item {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                padding: var(--space-lg);
+            }
+
+            .lesson-status {
+                margin-right: 0;
+                margin-bottom: var(--space-md);
+                margin-top: 0;
+            }
+
+            .lesson-content {
+                width: 100%;
+            }
+
+            .lesson-title {
+                justify-content: center;
+                text-align: center;
+            }
+
+            .modal-actions {
+                flex-direction: column;
+            }
+
+            .modal-btn {
+                width: 100%;
+            }
+
+            .video-modal-content {
+                padding: var(--space-md);
+            }
+        }
+
+        /* ============================= */
+        /* Focus States */
+        /* ============================= */
+        .action-btn:focus,
+        .lesson-item:focus,
+        .nav-link:focus,
+        .modal-btn:focus,
+        .video-modal-close:focus {
+            outline: 2px solid var(--primary);
+            outline-offset: 2px;
+        }
+
+        /* ============================= */
+        /* Content Sections */
+        /* ============================= */
+        .content-section {
+            display: block;
+            margin-bottom: var(--space-3xl);
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ============================= */
+        /* Progress Section Styles */
+        /* ============================= */
+        .progress-overview {
+            margin-bottom: var(--space-3xl);
+        }
+
+        .progress-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-lg);
+            margin-bottom: var(--space-2xl);
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            border: 1px solid var(--border-secondary);
+            display: flex;
+            align-items: center;
+            gap: var(--space-lg);
+            transition: all var(--transition);
+            box-shadow: var(--shadow-md);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
+        }
+
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .stat-info {
+            flex: 1;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1;
+            margin-bottom: var(--space-xs);
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .progress-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: var(--space-2xl);
+        }
+
+        .subsection-title {
+            font-family: var(--font-family-heading);
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: var(--space-lg);
+        }
+
+        /* Progress Table */
+        .progress-table-container {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            border: 1px solid var(--border-secondary);
+            box-shadow: var(--shadow-md);
+        }
+
+        .progress-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: var(--space-md);
+        }
+
+        .progress-table th,
+        .progress-table td {
+            padding: var(--space-md);
+            text-align: left;
+            border-bottom: 1px solid var(--border-primary);
+        }
+
+        .progress-table th {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+
+        .progress-table td {
+            color: var(--text-secondary);
+        }
+
+        .course-cell {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        .course-cell i {
+            color: var(--primary-light);
+        }
+
+        .progress-bar {
+            position: relative;
+            background: var(--bg-tertiary);
+            border-radius: 10px;
+            height: 20px;
+            overflow: hidden;
+            min-width: 100px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+
+        .progress-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: white;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .status-badge {
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-sm);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .status-badge.active {
+            background: var(--accent-emerald);
+            color: white;
+        }
+
+        .status-badge.paused {
+            background: var(--accent-orange);
+            color: white;
+        }
+
+        .status-badge.locked {
+            background: var(--bg-tertiary);
+            color: var(--text-disabled);
+        }
+
+        /* Charts */
+        .progress-charts {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-xl);
+        }
+
+        .chart-container {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            border: 1px solid var(--border-secondary);
+            box-shadow: var(--shadow-md);
+        }
+
+        .chart-wrapper {
+            position: relative;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-tertiary);
+            border-radius: var(--radius-md);
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        /* ============================= */
+        /* Community Section Styles */
+        /* ============================= */
+        .community-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: var(--space-xl);
+        }
+
+        .community-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            border: 1px solid var(--border-secondary);
+            box-shadow: var(--shadow-md);
+            transition: all var(--transition);
+        }
+
+        .community-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .community-header {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+        }
+
+        .community-header i {
+            font-size: 2rem;
+            color: var(--primary-light);
+        }
+
+        .community-header h3 {
+            font-family: var(--font-family-heading);
+            font-size: 1.5rem;
+            color: var(--text-primary);
+        }
+
+        .community-stats {
+            display: flex;
+            gap: var(--space-xl);
+            margin: var(--space-lg) 0;
+            padding: var(--space-lg);
+            background: var(--bg-tertiary);
+            border-radius: var(--radius-md);
+        }
+
+        .community-stat {
+            text-align: center;
+        }
+
+        .community-stat .stat-number {
+            display: block;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-light);
+        }
+
+        .community-stat .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .community-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: var(--space-md) var(--space-lg);
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition);
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            margin-top: var(--space-lg);
+        }
+
+        .community-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .event-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+
+        .event-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            padding: var(--space-md);
+            background: var(--bg-tertiary);
+            border-radius: var(--radius-md);
+            transition: all var(--transition);
+        }
+
+        .event-item:hover {
+            background: var(--bg-card-hover);
+        }
+
+        .event-date {
+            background: var(--primary);
+            color: white;
+            padding: var(--space-sm);
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            font-size: 0.9rem;
+            min-width: 60px;
+            text-align: center;
+        }
+
+        .event-info {
+            flex: 1;
+        }
+
+        .event-title {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: var(--space-xs);
+        }
+
+        .event-time {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Responsive Design for New Sections */
+        @media (max-width: 768px) {
+            .progress-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .progress-stats {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+            
+            .community-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .community-stats {
+                flex-direction: column;
+                gap: var(--space-md);
+            }
+        }
+
+.video-bg-box {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-xl);
+    height: 450px; /* ⬆️ Increased size */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+.video-bg-box .background-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+    opacity: 0.4; /* or lower/higher depending on readability */
+}
+
+.video-bg-box .welcome-overlay {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 2rem;
+    color: white;
+    max-width: 900px;
+}
+
+.video-bg-box .welcome-title {
+    font-size: clamp(2.5rem, 6vw, 3.5rem);
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.video-bg-box .welcome-description {
+    font-size: 1.2rem;
+    line-height: 1.7;
+}
+
+.video-bg-box .video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(10, 10, 15, 0.5), rgba(10, 10, 15, 0.7));
+    z-index: 1;
+}
+
+
+/* ===================================== */
+/* 🔥 Ultra Clean Dark Theme Overrides  */
+/* ===================================== */
+
+:root {
+  --primary: #ffffff;
+  --primary-dark: #cccccc;
+  --primary-light: #eeeeee;
+
+  --accent-orange: #aaaaaa;
+  --accent-orange-dark: #999999;
+  --accent-emerald: #888888;
+  --accent-purple: #777777;
+  --accent-cyan: #666666;
+
+  --bg-primary: #000000;
+  --bg-secondary: #0a0a0a;
+  --bg-tertiary: #121212;
+  --bg-card: #111111;
+  --bg-card-hover: #1b1b1b;
+
+  --text-primary: #ffffff;
+  --text-secondary: #cccccc;
+  --text-muted: #888888;
+  --text-disabled: #555555;
+
+  --glow-primary: rgba(255, 255, 255, 0.05);
+  --glow-orange: rgba(255, 255, 255, 0.05);
+  --glow-emerald: rgba(255, 255, 255, 0.05);
+  --glow-purple: rgba(255, 255, 255, 0.05);
+  --glow-cyan: rgba(255, 255, 255, 0.05);
+}
+
+.stat-card,
+.progress-table-container,
+.community-card,
+.chart-container,
+.course-card,
+.action-btn,
+.progress-charts,
+.modal-content {
+  background: var(--bg-card) !important;
+  box-shadow: none !important;
+  border: 1px solid rgba(255, 255, 255, 0.05) !important;
+  color: var(--text-primary) !important;
+}
+
+.stat-icon {
+  background: #1a1a1a !important;
+  border: 1px solid #333;
+}
+
+.action-btn,
+.details-btn,
+.lessons-btn {
+  background: #1a1a1a !important;
+  color: #fff !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: none !important;
+}
+
+.action-btn:hover,
+.details-btn:hover,
+.lessons-btn:hover {
+  background: #222 !important;
+  transform: translateY(-2px);
+}
+
+/* Remove glow shapes */
+.shape {
+  background: rgba(255, 255, 255, 0.03) !important;
+  box-shadow: none !important;
+}
+
+/* 🧨 Remove glass backgrounds and inner shine from card and buttons */
+.course-card,
+.details-btn,
+.lessons-btn {
+  background: #0d0d0d !important;
+  box-shadow: none !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+/* 🧽 Wipe out glowing border shine */
+.course-card::before,
+.details-btn::before,
+.lessons-btn::before {
+  background: none !important;
+  content: none !important;
+  mask: none !important;
+}
+
+/* 🧼 Flatten all hover states too */
+.details-btn:hover,
+.lessons-btn:hover {
+  background: #1a1a1a !important;
+  transform: translateY(-2px);
+  box-shadow: none !important;
+}
+
+/* 🔲 Override Header / Navbar */
+header, .header {
+  background-color: #0d0d0d !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+  box-shadow: none !important;
+}
+
+/* 💀 Remove animated gradient glows */
+.shape,
+.shape::before,
+.shape::after {
+  background: rgba(255, 255, 255, 0.02) !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  filter: none !important;
+}
+
+/* Optional: soften their animation (or kill it entirely) */
+.shape {
+  animation: none !important;
+  opacity: 0.03 !important;
+}
+
+
+.martial-arts-bg {
+  display: none !important;
+}
+
+.rotating-stars {
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200vw;
+  height: 200vh;
+  z-index: -2;
+  pointer-events: none;
+  animation: rotateStarField 180s linear infinite;
+}
+
+@keyframes rotateStarField {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.star-dot {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: white;
+  border-radius: 50%;
+}
+
+    
+.unlock-container {
+    position: relative;
+}
+
+.course-header .unlock-container {
+    position: static;
+    transform: none;
+}
+
+.unlock-btn {
+    background: #10b981;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.875rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    font-weight: 600;
+}
+
+.unlock-btn:hover {
+    background: #059669;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+svg[height="auto"] {
+  height: 1em !important; /* or 100% or fixed px */
+}
+
+
+</style>
+<script>
+    // Add this script tag to your HTML, preferably in the <head> or before your main script.
+    const CSRF_TOKEN = '{{ csrf_token }}';
+</script>
+</head>
+<body>
+    <div id="loading-overlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 10001; display: none; justify-content: center; align-items: center; color: white; font-size: 1.5rem;">
+        Processing...
+    </div>
+    <div class="rotating-stars"></div>
+
+    <!-- Martial arts inspired background -->
+    
+
+
+    <script>
+        // This variable now holds the ground truth from the server
+        const UNLOCKED_COURSES_FROM_SERVER = {{ unlocked_course_ids_json|safe }};
+    </script>
+
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <i class="fas fa-fist-raised"></i>
+                <div>
+                    <h1>Digital Taekwondo Academy</h1>
+                    <div class="tagline">Master Your Potential</div>
+                </div>
+            </div>
+            
+            <nav class="nav">
+                <a href="#dashboard" class="nav-link" onclick="showSection(\'welcome\')">Dashboard</a>
+                <a href="#courses" class="nav-link" onclick="showSection(\'courses\')">Courses</a>
+                <a href="#progress" class="nav-link" onclick="showSection(\'progress\')">Progress</a>
+            </nav>
+            
+            <div class="user-info">
+                <i class="fas fa-user-circle" style="font-size: 1.5rem; color: var(--primary-light);"></i>
+                <span id="username" style="font-weight: 500;">{{ user.username }}</span>
+                <span class="user-role">{{ role|capfirst }}</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+<section class="welcome-section video-bg-box">
+    <video autoplay muted loop playsinline class="background-video">
+        <source src="{% static 'video.mp4' %}" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <div class="video-overlay"></div>
+    <div class="welcome-overlay">
+        <h2 class="welcome-title">Welcome to Your Martial Arts Journey</h2>
+        <p class="welcome-description">
+            Embark on a transformative path of discipline, strength, and mastery. Our comprehensive digital learning platform combines traditional Taekwondo wisdom with modern technology to guide you through every step of your martial arts evolution.
+        </p>
+    </div>
+</section>
+
+
+        <section id="courses" class="content-section">
+            <section class="courses-section">
+                <h2 class="section-title">Training Modules</h2>
+            
+            <div class="courses-container">
+                <div class="course-card" id="course-1">
+                    <div class="course-header">
+                        <div class="course-info">
+                            <h3><i class="fas fa-seedling"></i> Fundamentals</h3>
+                            <p class="course-description">Master the essential building blocks of Taekwondo. Learn proper stances, basic kicks, and fundamental principles that form the foundation of all advanced techniques.</p>
+                        </div>
+                        <div class="unlock-container" onclick="event.stopPropagation();">
+                             <button class="unlock-btn" onclick="payToUnlockCourse('course-1', 100)">Unlock Course for ₹100</button>
+                        </div>
+                    </div>
+                    
+                    <div class="course-actions">
+                        <button class="action-btn details-btn" onclick="toggleDetails('course-1')">
+                            <i class="fas fa-info-circle"></i>
+                            Course Details
+                        </button>
+                        <button class="action-btn lessons-btn" onclick="toggleLessons('course-1')">
+                            <i class="fas fa-play-circle"></i>
+                            Lessons
+                        </button>
+                    </div>
+                    
+                    <div class="details-container">
+                        <div class="course-details">
+                            <div class="detail-item">
+                                <div class="detail-label">Course Overview</div>
+                                <div class="detail-value">This comprehensive fundamentals course introduces you to the core principles of Taekwondo. You'll develop proper form, learn essential techniques, and build the foundation needed for advanced training.</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">Prerequisites</div>
+                                <div class="detail-value">No prior martial arts experience required. Suitable for complete beginners.</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">Learning Objectives</div>
+                                <div class="detail-value">Master basic stances, execute fundamental kicks with proper form, understand Taekwondo philosophy and etiquette, develop balance and coordination.</div>
+                            </div>
+                            <div class="detail-stats">
+                                <div class="stat-item">
+                                    <span class="stat-number">4</span>
+                                    <span class="stat-label">Lessons</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-number">2-3</span>
+                                    <span class="stat-label">Hours</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-number">Beginner</span>
+                                    <span class="stat-label">Level</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="lessons-container">
+                        <div class="lessons-list">
+                            <div class="lesson-item unlocked" data-video-id="dQw4w9WgXcQ" onclick="openLesson('course-1', 'dQw4w9WgXcQ', 0)"> 
+                                
+                                <div class="lesson-status">1</div>
+                                <div class="lesson-content">
+                                    <div class="lesson-title">
+                                        <i class="fas fa-play-circle"></i>
+                                        Introduction to Taekwondo
+                                    </div>
+                                    <div class="lesson-description">History, philosophy, and core principles of the martial art</div>
+                                </div>
+                            </div>
+                            
+
+                            <div class="lesson-item locked" data-video-id="dQw4w9WgXcQ" onclick="openLesson('course-1', 'dQw4w9WgXcQ', 1)"> 
+                                <div class="lesson-status">2</div>
+                                <div class="lesson-content">
+                                    <div class="lesson-title">
+                                        <i class="fas fa-play-circle"></i>
+                                        Basic Stances
+                                    </div>
+                                    <div class="lesson-description">Fundamental standing positions and weight distribution</div>
+                                </div>
+                            </div>
+
+                            <div class="lesson-item locked" data-video-id="kpGq-sDnx5M" onclick="openLesson('course-1', 'kpGq-sDnx5M', 2)">
+                                <div class="lesson-status">3</div>
+                                <div class="lesson-content">
+                                    <div class="lesson-title">
+                                        <i class="fas fa-play-circle"></i>
+                                        Front Kick Technique
+                                    </div>
+                                    <div class="lesson-description">Step-by-step breakdown of the fundamental front kick</div>
+                                </div>
+                            </div>
+                            
+                            <div class="lesson-item locked" data-video-id="example-video-4">
+                                <div class="lesson-status">
+                                    <i class="fas fa-lock"></i>
+                                </div>
+                                <div class="lesson-content">
+                                    <div class="lesson-title">
+                                        <i class="fas fa-play-circle"></i>
+                                        Side Kick Fundamentals
+                                    </div>
+                                    <div class="lesson-description">Master the powerful side kick technique</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="course-card" id="course-2">
+                    <div class="course-header">
+                        <div class="course-info">
+                            <h3><i class="fas fa-fire"></i> Intermediate Techniques</h3>
+                            <p class="course-description">Advance your skills with complex combinations, jumping kicks, and dynamic movements. Build upon your foundation with challenging techniques and fluid transitions.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="course-actions">
+                        <button class="action-btn details-btn" onclick="toggleDetails('course-2')">
+                            <i class="fas fa-info-circle"></i>
+                            Course Details
+                        </button>
+                        <button class="action-btn lessons-btn" onclick="toggleLessons('course-2')">
+                            <i class="fas fa-play-circle"></i>
+                            Lessons
+                        </button>
+                    </div>
+                    
+                    <div class="details-container">
+                        <div class="course-details">
+                            <div class="detail-item">
+                                <div class="detail-label">Course Overview</div>
+                                <div class="detail-value">Take your Taekwondo skills to the next level with intermediate techniques. Learn complex combinations, jumping kicks, and advanced sparring strategies.</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">Prerequisites</div>
+                                <div class="detail-value">Completion of Fundamentals course and demonstration of basic techniques.</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">Learning Objectives</div>
+                                <div class="detail-value">Execute complex kick combinations, perform jumping and spinning techniques, apply intermediate sparring strategies, develop advanced timing and distance control.</div>
+                            </div>
+                            <div class="detail-stats">
+                                <div class="stat-item">
+                                    <span class="stat-number">6</span>
+                                    <span class="stat-label">Lessons</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-number">4-5</span>
+                                    <span class="stat-label">Hours</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-number">Intermediate</span>
+                                    <span class="stat-label">Level</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="lessons-container">
+                        <div class="lessons-list">
+                            <div class="lesson-item unlocked" data-video-id="example-video-5" onclick="openLesson('course-2', 'example-video-5', 0)">
+                                <div class="lesson-status">1</div>
+                                <div class="lesson-content">
+                                    <div class="lesson-title">
+                                        <i class="fas fa-play-circle"></i>
+                                        Combination Techniques
+                                    </div>
+                                    <div class="lesson-description">Linking multiple techniques in fluid sequences</div>
+                                </div>
+                            </div>
+                            
+                            <div class="lesson-item locked" data-video-id="example-video-6">
+                                <div class="lesson-status">
+                                    <i class="fas fa-lock"></i>
+                                </div>
+                                <div class="lesson-content">
+                                    <div class="lesson-title">
+                                        <i class="fas fa-play-circle"></i>
+                                        Jumping Kicks
+                                    </div>
+                                    <div class="lesson-description">Aerial techniques and dynamic kicking combinations</div>
+                                </div>
+                            </div>
+                            
+                            <div class="lesson-item locked" data-video-id="example-video-7">
+                                <div class="lesson-status">
+                                    <i class="fas fa-lock"></i>
+                                </div>
+                                <div class="lesson-content">
+                                    <div class="lesson-title">
+                                        <i class="fas fa-play-circle"></i>
+                                        Sparring Fundamentals
+                                    </div>
+                                    <div class="lesson-description">Introduction to controlled combat and timing</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="course-card" id="course-3">
+                    <div class="course-header">
+                        <div class="course-info">
+                            <h3><i class="fas fa-crown"></i> Advanced Mastery</h3>
+                            <p class="course-description">Achieve mastery through advanced forms, competition techniques, and teaching methodology. Prepare for black belt testing and leadership roles.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="course-actions">
+                        <button class="action-btn details-btn" onclick="toggleDetails('course-3')">
+                            <i class="fas fa-info-circle"></i>
+                            Course Details
+                        </button>
+                        <button class="action-btn lessons-btn" onclick="toggleLessons('course-3')">
+                            <i class="fas fa-play-circle"></i>
+                            Lessons
+                        </button>
+                    </div>
+                    
+                    <div class="details-container">
+                        <div class="course-details">
+                            <div class="detail-item">
+                                <div class="detail-label">Course Overview</div>
+                                <div class="detail-value">Master the highest levels of Taekwondo through advanced forms, competition strategies, and leadership development. Prepare for black belt certification and teaching opportunities.</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">Prerequisites</div>
+                                <div class="detail-value">Completion of Intermediate course and demonstration of advanced techniques. Minimum 1 year of consistent training.</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">Learning Objectives</div>
+                                <div class="detail-value">Master advanced forms (Poomsae), develop competition strategies, learn teaching methodology, prepare for black belt testing, understand leadership principles.</div>
+                            </div>
+                            <div class="detail-stats">
+                                <div class="stat-item">
+                                    <span class="stat-number">8</span>
+                                    <span class="stat-label">Lessons</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-number">6-8</span>
+                                    <span class="stat-label">Hours</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-number">Advanced</span>
+                                    <span class="stat-label">Level</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="lessons-container">
+                        <div class="lessons-list">
+                            <div class="lesson-item unlocked" data-video-id="example-video-8" onclick="openLesson('course-3', 'example-video-8', 0)">
+                                <div class="lesson-status">1</div>
+                                <div class="lesson-content">
+                                    <div class="lesson-title">
+                                        <i class="fas fa-play-circle"></i>
+                                        Advanced Forms (Poomsae)
+                                    </div>
+                                    <div class="lesson-description">Complex patterns and precise execution</div>
+                                </div>
+                            </div>
+                            
+                            <div class="lesson-item locked" data-video-id="example-video-9">
+                                <div class="lesson-status">
+                                    <i class="fas fa-lock"></i>
+                                </div>
+                                <div class="lesson-content">
+                                    <div class="lesson-title">
+                                        <i class="fas fa-play-circle"></i>
+                                        Competition Strategy
+                                    </div>
+                                    <div class="lesson-description">Tournament preparation and competitive mindset</div>
+                                </div>
+                            </div>
+                            
+                            <div class="lesson-item locked" data-video-id="example-video-10">
+                                <div class="lesson-status">
+                                    <i class="fas fa-lock"></i>
+                                </div>
+                                <div class="lesson-content">
+                                    <div class="lesson-title">
+                                        <i class="fas fa-play-circle"></i>
+                                        Teaching Methodology
+                                    </div>
+                                    <div class="lesson-description">Leadership skills and instruction techniques</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </section>
+        </section>
+
+        <section id="progress" class="content-section">
+            <h2 class="section-title">Your Progress</h2>
+            
+            <div class="progress-overview">
+                <div class="progress-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-trophy"></i></div>
+                        <div class="stat-info">
+                            <div class="stat-number">75%</div>
+                            <div class="stat-label">Overall Progress</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-fire"></i></div>
+                        <div class="stat-info">
+                            <div class="stat-number">12</div>
+                            <div class="stat-label">Day Streak</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-clock"></i></div>
+                        <div class="stat-info">
+                            <div class="stat-number">24h</div>
+                            <div class="stat-label">Total Time</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-medal"></i></div>
+                        <div class="stat-info">
+                            <div class="stat-number">8</div>
+                            <div class="stat-label">Completed</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="progress-content">
+                <div class="progress-table-container">
+                    <h3 class="subsection-title">Course Progress Details</h3>
+                    <table class="progress-table">
+                        <thead>
+                            <tr>
+                                <th>Course</th>
+                                <th>Lessons Completed</th>
+                                <th>Progress</th>
+                                <th>Time Spent</th>
+                                <th>Last Activity</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="course-cell">
+                                        <i class="fas fa-seedling"></i>
+                                        <span>Fundamentals</span>
+                                    </div>
+                                </td>
+                                <td>3/4</td>
+                                <td>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 75%"></div>
+                                        <span class="progress-text">75%</span>
+                                    </div>
+                                </td>
+                                <td>2.5 hours</td>
+                                <td>2 days ago</td>
+                                <td><span class="status-badge active">Active</span></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="course-cell">
+                                        <i class="fas fa-fire"></i>
+                                        <span>Intermediate Techniques</span>
+                                    </div>
+                                </td>
+                                <td>2/6</td>
+                                <td>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 33%"></div>
+                                        <span class="progress-text">33%</span>
+                                    </div>
+                                </td>
+                                <td>1.8 hours</td>
+                                <td>5 days ago</td>
+                                <td><span class="status-badge paused">Paused</span></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="course-cell">
+                                        <i class="fas fa-crown"></i>
+                                        <span>Advanced Mastery</span>
+                                    </div>
+                                </td>
+                                <td>0/8</td>
+                                <td>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 0%"></div>
+                                        <span class="progress-text">0%</span>
+                                    </div>
+                                </td>
+                                <td>0 hours</td>
+                                <td>Never</td>
+                                <td><span class="status-badge locked">Locked</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="progress-charts">
+                    <div class="chart-container">
+                        <h3 class="subsection-title">Weekly Activity</h3>
+                        <div class="chart-wrapper">
+                            <canvas id="weeklyChart" width="400" height="200">Weekly Activity Chart</canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-container">
+                        <h3 class="subsection-title">Skills Distribution</h3>
+                        <div class="chart-wrapper">
+                            <canvas id="skillsChart" width="300" height="300">Skills Distribution Chart</canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        
+
+    <div class="video-modal-overlay" id="videoModal">
+        <div class="video-modal-content">
+            <div class="video-modal-header">
+                <h3 class="video-modal-title" id="videoModalTitle">Lesson Video</h3>
+                <button class="video-modal-close" onclick="closeModal()">
+                    <i class="fas fa-times-circle"></i>
+                </button>
+            </div>
+            <div class="video-container">
+                <iframe id="youtubePlayer" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <div class="modal-actions">
+                <button class="modal-btn mark-completed" id="markCompletedBtn" onclick="markLessonCompleted()">
+                    <i class="fas fa-check-circle"></i> Mark as Completed
+                </button>
+                <button class="modal-btn unmark-completed" id="unmarkCompletedBtn" onclick="unmarkLessonCompleted()">
+                    <i class="fas fa-undo-alt"></i> Unmark Completed
+                </button>
+                <button class="modal-btn close-btn" onclick="closeModal()">
+                    <i class="fas fa-times"></i> Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleDetails(courseId) {
+            const courseCard = document.getElementById(courseId);
+            const detailsBtn = courseCard.querySelector('.details-btn');
+            
+            const isExpanded = courseCard.classList.contains('details-expanded');
+            
+            // Close all other details
+            document.querySelectorAll('.course-card').forEach(card => {
+                if (card !== courseCard) {
+                    card.classList.remove('details-expanded');
+                    const otherDetailsBtn = card.querySelector('.details-btn');
+                    if (otherDetailsBtn) {
+                        otherDetailsBtn.innerHTML = '<i class="fas fa-info-circle"></i> Course Details';
+                    }
+                }
+            });
+            
+            // Toggle current details
+            courseCard.classList.toggle('details-expanded');
+            
+            // Update button text
+            const btn = courseCard.querySelector('.details-btn');
+            if (btn) {
+                const icon = btn.querySelector('i');
+                if (courseCard.classList.contains('details-expanded')) {
+                    icon.className = 'fas fa-chevron-up';
+                    btn.innerHTML = '<i class="fas fa-chevron-up"></i> Hide Details';
+                } else {
+                    icon.className = 'fas fa-info-circle';
+                    btn.innerHTML = '<i class="fas fa-info-circle"></i> Course Details';
+                }
+            }
+        }
+
+        function toggleLessons(courseId) {
+            const courseCard = document.getElementById(courseId);
+            const lessonsBtn = courseCard.querySelector('.lessons-btn');
+            
+            // Check if lessons are locked
+            if (lessonsBtn.disabled) {
+                return;
+            }
+            
+            const isExpanded = courseCard.classList.contains('lessons-expanded');
+            
+            // Close all other lessons
+            document.querySelectorAll('.course-card').forEach(card => {
+                if (card !== courseCard) {
+                    card.classList.remove('lessons-expanded');
+                    const otherLessonsBtn = card.querySelector('.lessons-btn');
+                    if (otherLessonsBtn && !otherLessonsBtn.disabled) {
+                        otherLessonsBtn.innerHTML = '<i class="fas fa-play-circle"></i> Lessons';
+                    }
+                }
+            });
+            
+            // Toggle current lessons
+            courseCard.classList.toggle('lessons-expanded');
+            
+            // Update button text
+            const icon = lessonsBtn.querySelector('i');
+            if (courseCard.classList.contains('lessons-expanded')) {
+                icon.className = 'fas fa-chevron-up';
+                lessonsBtn.innerHTML = '<i class="fas fa-chevron-up"></i> Hide Lessons';
+            } else {
+                icon.className = 'fas fa-play-circle';
+                lessonsBtn.innerHTML = '<i class="fas fa-play-circle"></i> Lessons';
+            }
+        }
+
+        function openLesson(courseId, videoId, lessonIndex) {
+            const videoModal = document.getElementById('videoModal');
+            const youtubePlayer = document.getElementById('youtubePlayer');
+            const markCompletedBtn = document.getElementById('markCompletedBtn');
+            const unmarkCompletedBtn = document.getElementById('unmarkCompletedBtn');
+            const lessonItem = document.querySelector(`#${courseId} .lessons-list .lesson-item:nth-child(${lessonIndex + 1})`);
+            const lessonTitleElement = lessonItem.querySelector('.lesson-title');
+            const videoModalTitle = document.getElementById('videoModalTitle');
+
+            // Prevent opening locked lessons
+            if (lessonItem.classList.contains('locked')) {
+                console.log(`Lesson ${lessonIndex + 1} in course ${courseId} is locked.`);
+                return;
+            }
+
+            // Set modal title
+            videoModalTitle.textContent = lessonTitleElement ? lessonTitleElement.textContent.trim() : 'Lesson Video';
+            
+            // Set the YouTube video source
+            if (!lessonItem.classList.contains('locked')) {
+            youtubePlayer.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+            } 
+            else {
+                youtubePlayer.src = ""; // Do not load any video
+                youtubePlayer.outerHTML = `<div id="youtubePlayer" style="color: #ccc; text-align: center; padding: 40px;">
+                🔒 This lesson is locked. Please unlock to watch the video.
+                </div>`;
+            }
+            
+            // Store courseId and lessonIndex in the buttons' dataset
+            markCompletedBtn.dataset.courseId = courseId;
+            markCompletedBtn.dataset.lessonIndex = lessonIndex;
+            unmarkCompletedBtn.dataset.courseId = courseId;
+            unmarkCompletedBtn.dataset.lessonIndex = lessonIndex;
+
+            // Show/hide mark as completed and unmark buttons based on lesson status
+            if (lessonItem.classList.contains('completed')) {
+                markCompletedBtn.style.display = 'none';
+                unmarkCompletedBtn.style.display = 'flex';
+            } else {
+                markCompletedBtn.style.display = 'flex';
+                unmarkCompletedBtn.style.display = 'none';
+            }
+
+            // Show the modal
+            videoModal.classList.add('open');
+
+            // Add click animation (optional, but good for UX)
+            if (event && event.currentTarget) {
+                event.currentTarget.style.transform = 'scale(0.98)';
+                setTimeout(() => {
+                    event.currentTarget.style.transform = '';
+                }, 150);
+            }
+            
+            console.log(`Opening lesson ${lessonIndex} for course ${courseId} with video ID: ${videoId}`);
+        }
+
+        function closeModal() {
+            const videoModal = document.getElementById('videoModal');
+            const youtubePlayer = document.getElementById('youtubePlayer');
+            
+            // Stop the YouTube video by clearing its source
+            youtubePlayer.src = '';
+            
+            // Hide the modal
+            videoModal.classList.remove('open');
+        }
+
+        function markLessonCompleted() {
+            const markCompletedBtn = document.getElementById('markCompletedBtn');
+            const courseId = markCompletedBtn.dataset.courseId;
+            const lessonIndex = parseInt(markCompletedBtn.dataset.lessonIndex);
+
+            if (courseId && !isNaN(lessonIndex)) {
+                const courseCard = document.getElementById(courseId);
+                const lessonsList = courseCard.querySelector('.lessons-list');
+                const lessonToMark = lessonsList.children[lessonIndex];
+
+                if (lessonToMark && !lessonToMark.classList.contains('completed')) {
+                    lessonToMark.classList.remove('unlocked');
+                    lessonToMark.classList.add('completed');
+                    lessonToMark.querySelector('.lesson-status').innerHTML = '<i class="fas fa-check"></i>';
+                    lessonToMark.querySelector('.lesson-description').style.color = 'rgba(255, 255, 255, 0.8)'; // Set color for completed state
+                    
+                    // Save completion data with timestamp
+                    saveCompletionData(courseId, lessonIndex);
+                    
+                    // Update progress stats
+                    updateProgressStats();
+                    
+                    console.log(`Lesson ${lessonIndex + 1} in course ${courseId} marked as completed.`);
+                }
+            }
+            closeModal();
+        }
+
+        function unmarkLessonCompleted() {
+            const unmarkCompletedBtn = document.getElementById('unmarkCompletedBtn');
+            const courseId = unmarkCompletedBtn.dataset.courseId;
+            const lessonIndex = parseInt(unmarkCompletedBtn.dataset.lessonIndex);
+
+            if (courseId && !isNaN(lessonIndex)) {
+                const courseCard = document.getElementById(courseId);
+                const lessonsList = courseCard.querySelector('.lessons-list');
+                const lessonToUnmark = lessonsList.children[lessonIndex];
+
+                if (lessonToUnmark && lessonToUnmark.classList.contains('completed')) {
+                    lessonToUnmark.classList.remove('completed');
+                    lessonToUnmark.classList.add('unlocked'); // Unmarking makes it unlocked again
+                    lessonToUnmark.querySelector('.lesson-status').innerHTML = lessonIndex + 1;
+                    lessonToUnmark.querySelector('.lesson-description').style.color = ''; // Reset to default color
+                    
+                                       removeCompletionData(courseId, lessonIndex);
+                    
+                    // Update progress stats
+                    updateProgressStats(); console.log(`Lesson ${lessonIndex + 1} in course ${courseId} unmarked as completed.`);
+                }
+            }
+            closeModal();
+        }
+
+
+        // Scroll effects for header
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            const scrolled = window.pageYOffset;
+            
+            if (scrolled > 50) {
+                header.style.background = 'rgba(30, 41, 59, 0.95)';
+            } else {
+                header.style.background = 'rgba(30, 41, 59, 0.9)';
+            }
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.course-card').forEach(card => {
+                    card.classList.remove('details-expanded', 'lessons-expanded');
+                    
+                    // Reset button texts
+                    const detailsBtn = card.querySelector('.details-btn');
+                    const lessonsBtn = card.querySelector('.lessons-btn');
+                    
+                    if (detailsBtn) {
+                        detailsBtn.innerHTML = '<i class="fas fa-info-circle"></i> Course Details';
+                    }
+                    if (lessonsBtn && !lessonsBtn.disabled) {
+                        lessonsBtn.innerHTML = '<i class="fas fa-play-circle"></i> Lessons';
+                    }
+                });
+                closeModal(); // Also close the modal on escape
+            }
+        });
+
+        // Progress tracking functions
+        function updateProgressStats() {
+            const courses = ['course-1', 'course-2', 'course-3'];
+            let totalLessons = 0;
+            let completedLessons = 0;
+            let totalTimeSpent = 0;
+            
+            // Get completion data from localStorage or initialize
+            let completionData = JSON.parse(localStorage.getItem('lessonCompletions') || '{}');
+            
+            courses.forEach(courseId => {
+                const courseLessons = document.querySelector(`#${courseId} .lessons-list`).children;
+                totalLessons += courseLessons.length;
+                
+                for (let lesson of courseLessons) {
+                    if (lesson.classList.contains('completed')) {
+                        completedLessons++;
+                        totalTimeSpent += 0.5; // Assume 30 minutes per completed lesson
+                    }
+                }
+            });
+            
+            // Update overall progress percentage
+            const overallProgress = totalLessons > 0 ? Math.round((completedLessons / totalLessons) * 100) : 0;
+            document.querySelector('.stat-card .stat-number').textContent = overallProgress + '%';
+            
+            // Update completed lessons count
+            document.querySelector('.stat-card:nth-child(4) .stat-number').textContent = completedLessons;
+            
+            // Update total time
+            document.querySelector('.stat-card:nth-child(3) .stat-number').textContent = totalTimeSpent.toFixed(1) + 'h';
+            
+            // Update day streak
+            updateDayStreak(completionData);
+            
+            // Update progress table
+            updateProgressTable();
+            
+            // Update charts
+            updateWeeklyActivityChart(completionData);
+            updateSkillsDistributionChart();
+        }
+        
+        function updateDayStreak(completionData) {
+            const today = new Date();
+            const todayStr = today.toDateString();
+            let streak = 0;
+            
+            // Check if there's activity today
+            const hasActivityToday = Object.values(completionData).some(date => 
+                new Date(date).toDateString() === todayStr
+            );
+            
+            if (hasActivityToday) {
+                streak = 1;
+                
+                // Count consecutive days backwards
+                for (let i = 1; i < 30; i++) { // Check up to 30 days back
+                    const checkDate = new Date(today);
+                    checkDate.setDate(today.getDate() - i);
+                    const checkDateStr = checkDate.toDateString();
+                    
+                    const hasActivityOnDate = Object.values(completionData).some(date => 
+                        new Date(date).toDateString() === checkDateStr
+                    );
+                    
+                    if (hasActivityOnDate) {
+                        streak++;
+                    } else {
+                        break;
+                    }
+                }
+            }
+            
+            document.querySelector('.stat-card:nth-child(2) .stat-number').textContent = streak;
+        }
+        
+function updateWeeklyActivityChart(completionData) {
+    const canvas = document.getElementById('weeklyChart');
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    const width = canvas.width;
+    const height = canvas.height;
+
+    ctx.clearRect(0, 0, width, height);
+
+    // ⬇️ If there's no completion data, use all zeroes
+    if (!completionData || Object.keys(completionData).length === 0) {
+        completionData = { dummy: new Date(0).toISOString() }; // Future-proof fallback
+    }
+
+    const weeklyData = Object.keys(completionData).length === 0
+    ? [0, 0, 0, 0, 0, 0, 0]
+    : generateWeeklyData(completionData);
+
+    const maxValue = Math.max(...weeklyData, 1);
+
+    const barWidth = width / 7;
+    const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+
+    weeklyData.forEach((value, index) => {
+        const barHeight = (value / maxValue) * (height - 40);
+        const x = index * barWidth + 10;
+        const y = height - barHeight - 20;
+
+        ctx.fillStyle = '#4f46e5';
+        ctx.fillRect(x, y, barWidth - 20, barHeight);
+
+        ctx.fillStyle = '#e2e8f0';
+        ctx.font = '12px Inter';
+        ctx.textAlign = 'center';
+        ctx.fillText(value + 'min', x + (barWidth - 20) / 2, y - 5);
+        ctx.fillText(days[index], x + (barWidth - 20) / 2, height - 5);
+    });
+}
+
+        
+        function generateWeeklyData(completionData) {
+            const today = new Date();
+            const weekData = [0, 0, 0, 0, 0, 0, 0]; // Mon-Sun
+            
+            Object.values(completionData).forEach(dateStr => {
+                const completionDate = new Date(dateStr);
+                const daysDiff = Math.floor((today - completionDate) / (1000 * 60 * 60 * 24));
+                
+                if (daysDiff >= 0 && daysDiff < 7) {
+                    const dayOfWeek = (completionDate.getDay() + 6) % 7; // Convert to Mon=0, Sun=6
+                    weekData[dayOfWeek] += 30; // 30 minutes per lesson
+                }
+            });
+            
+            return weekData;
+        }
+        
+        function updateSkillsDistributionChart() {
+            const canvas = document.getElementById('skillsChart');
+            if (!canvas) return;
+            
+            const ctx = canvas.getContext('2d');
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            const radius = Math.min(centerX, centerY) - 20;
+            
+            // Clear canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Calculate skills distribution based on completed lessons
+            const skillsData = calculateSkillsDistribution();
+            const colors = ['#4f46e5', '#f59e0b', '#10b981', '#ef4444'];
+            const labels = ['Fundamentals', 'Techniques', 'Sparring', 'Theory'];
+            
+            let currentAngle = -Math.PI / 2; // Start from top
+            
+            skillsData.forEach((percentage, index) => {
+                const sliceAngle = (percentage / 100) * 2 * Math.PI;
+                
+                // Draw slice
+                ctx.beginPath();
+                ctx.moveTo(centerX, centerY);
+                ctx.arc(centerX, centerY, radius, currentAngle, currentAngle + sliceAngle);
+                ctx.closePath();
+                ctx.fillStyle = colors[index];
+                ctx.fill();
+                
+                // Draw label
+                const labelAngle = currentAngle + sliceAngle / 2;
+                const labelX = centerX + Math.cos(labelAngle) * (radius * 0.7);
+                const labelY = centerY + Math.sin(labelAngle) * (radius * 0.7);
+                
+                ctx.fillStyle = '#ffffff';
+                ctx.font = 'bold 12px Inter';
+                ctx.textAlign = 'center';
+                ctx.fillText(labels[index], labelX, labelY - 5);
+                ctx.fillText(percentage + '%', labelX, labelY + 10);
+                
+                currentAngle += sliceAngle;
+            });
+        }
+        
+        function calculateSkillsDistribution() {
+            const courses = ['course-1', 'course-2', 'course-3'];
+            const skillCategories = [0, 0, 0, 0]; // Fundamentals, Techniques, Sparring, Theory
+            let totalCompleted = 0;
+            
+            courses.forEach((courseId, courseIndex) => {
+                const courseLessons = document.querySelector(`#${courseId} .lessons-list`).children;
+                
+                for (let lesson of courseLessons) {
+                    if (lesson.classList.contains('completed')) {
+                        totalCompleted++;
+                        
+                        // Categorize lessons based on course and content
+                        if (courseIndex === 0) { // Fundamentals course
+                            skillCategories[0]++; // Fundamentals
+                            skillCategories[3]++; // Theory (philosophy, history)
+                        } else if (courseIndex === 1) { // Intermediate course
+                            skillCategories[1]++; // Techniques
+                            skillCategories[2]++; // Sparring
+                        } else { // Advanced course
+                            skillCategories[1]++; // Advanced techniques
+                            skillCategories[2]++; // Competition sparring
+                        }
+                    }
+                }
+            });
+            
+            // Convert to percentages
+            if (totalCompleted === 0) {
+                return [0,0,0,0]; // Default distribution
+            }
+            
+            const total = skillCategories.reduce((sum, val) => sum + val, 0);
+            return skillCategories.map(val => Math.round((val / total) * 100));
+        }
+        
+        function saveCompletionData(courseId, lessonIndex) {
+            let completionData = JSON.parse(localStorage.getItem('lessonCompletions') || '{}');
+            const key = `${courseId}-lesson-${lessonIndex}`;
+            completionData[key] = new Date().toISOString();
+            localStorage.setItem('lessonCompletions', JSON.stringify(completionData));
+        }
+        
+        function removeCompletionData(courseId, lessonIndex) {
+            let completionData = JSON.parse(localStorage.getItem('lessonCompletions') || '{}');
+            const key = `${courseId}-lesson-${lessonIndex}`;
+            delete completionData[key];
+            localStorage.setItem('lessonCompletions', JSON.stringify(completionData));
+        }
+        
+        function updateProgressTable() {
+            const courseData = [
+                { id: 'course-1', name: 'Fundamentals', icon: 'fas fa-seedling', totalLessons: 4 },
+                { id: 'course-2', name: 'Intermediate Techniques', icon: 'fas fa-fire', totalLessons: 6 },
+                { id: 'course-3', name: 'Advanced Mastery', icon: 'fas fa-crown', totalLessons: 8 }
+            ];
+            
+            const tableBody = document.querySelector('.progress-table tbody');
+            tableBody.innerHTML = '';
+            
+            courseData.forEach((course, index) => {
+                const courseLessons = document.querySelector(`#${course.id} .lessons-list`).children;
+                let completedCount = 0;
+                let hasUnlockedLessons = false;
+                
+                for (let lesson of courseLessons) {
+                    if (lesson.classList.contains('completed')) {
+                        completedCount++;
+                    }
+                    if (lesson.classList.contains('unlocked') || lesson.classList.contains('completed')) {
+                        hasUnlockedLessons = true;
+                    }
+                }
+                
+                const progressPercentage = Math.round((completedCount / course.totalLessons) * 100);
+                const timeSpent = (completedCount * 0.5).toFixed(1);
+                
+                // Determine status
+                let status = 'locked';
+                let statusClass = 'locked';
+                if (hasUnlockedLessons) {
+                    if (completedCount === course.totalLessons) {
+                        status = 'completed';
+                        statusClass = 'active';
+                    } else if (completedCount > 0) {
+                        status = 'active';
+                        statusClass = 'active';
+                    } else {
+                        status = 'active';
+                        statusClass = 'active';
+                    }
+                }
+                
+                // Determine last activity
+                let lastActivity = 'Never';
+                if (completedCount > 0) {
+                    lastActivity = '1 day ago'; // Simplified for demo
+                } else if (hasUnlockedLessons) {
+                    lastActivity = '3 days ago';
+                }
+                
+                const row = `
+                    <tr>
+                        <td>
+                            <div class="course-cell">
+                                <i class="${course.icon}"></i>
+                                <span>${course.name}</span>
+                            </div>
+                        </td>
+                        <td>${completedCount}/${course.totalLessons}</td>
+                        <td>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: ${progressPercentage}%"></div>
+                                <span class="progress-text">${progressPercentage}%</span>
+                            </div>
+                        </td>
+                        <td>${timeSpent} hours</td>
+                        <td>${lastActivity}</td>
+                        <td><span class="status-badge ${statusClass}">${status}</span></td>
+                    </tr>
+                `;
+                
+                tableBody.innerHTML += row;
+            });
+        }
+
+
+
+        // ============================= //
+        // Navigation Functions
+        // ============================= //
+        function showSection(sectionId) {
+            // Scroll to the target section
+            const targetSection = document.getElementById(sectionId);
+            if (targetSection) {
+                targetSection.scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+            
+            // Update navigation active state
+            updateActiveNavLink(sectionId);
+            
+            // Initialize charts if showing progress section
+            if (sectionId === 'progress') {
+                setTimeout(initializeCharts, 500); // Delay to ensure section is visible
+            }
+        }
+
+        function updateActiveNavLink(sectionId) {
+            // Remove active class from all nav links
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // Set active nav link
+            const activeLink = document.querySelector(`[onclick="showSection('${sectionId}')"]`);
+            if (activeLink) {
+                activeLink.classList.add('active');
+            }
+        }
+
+        // ============================= //
+        // Scroll Spy Functionality
+        // ============================= //
+        function initializeScrollSpy() {
+            const sections = document.querySelectorAll('.content-section');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            const observerOptions = {
+                root: null,
+                rootMargin: '-20% 0px -70% 0px',
+                threshold: 0
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const sectionId = entry.target.id;
+                        updateActiveNavLink(sectionId);
+                        
+                        // Initialize charts when progress section comes into view
+                        if (sectionId === 'progress') {
+                            initializeCharts();
+                        }
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        }
+
+
+
+        // ============================= //
+        // Chart Initialization
+        // ============================= //
+        function initializeCharts() {
+            // Simple chart placeholders - in a real app, you'd use Chart.js or similar
+            const weeklyChart = document.getElementById('weeklyChart');
+            const skillsChart = document.getElementById('skillsChart');
+            
+            if (weeklyChart && !weeklyChart.hasAttribute('data-initialized')) {
+                const ctx = weeklyChart.getContext('2d');
+                
+                // Simple bar chart simulation
+                ctx.fillStyle = '#6366f1';
+                const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+                const values = [0, 0, 0, 0, 0, 0, 0];
+                
+                ctx.clearRect(0, 0, weeklyChart.width, weeklyChart.height);
+                
+                const barWidth = weeklyChart.width / days.length - 10;
+                const maxValue = Math.max(...values);
+                
+                days.forEach((day, index) => {
+                    const barHeight = (values[index] / maxValue) * (weeklyChart.height - 40);
+                    const x = index * (barWidth + 10) + 5;
+                    const y = weeklyChart.height - barHeight - 20;
+                    
+                    ctx.fillRect(x, y, barWidth, barHeight);
+                    
+                    // Add labels
+                    ctx.fillStyle = '#e2e8f0';
+                    ctx.font = '12px Inter';
+                    ctx.textAlign = 'center';
+                    ctx.fillText(day, x + barWidth/2, weeklyChart.height - 5);
+                    ctx.fillText(values[index] + 'min', x + barWidth/2, y - 5);
+                    
+                    ctx.fillStyle = '#6366f1';
+                });
+                
+                weeklyChart.setAttribute('data-initialized', 'true');
+            }
+            
+            if (skillsChart && !skillsChart.hasAttribute('data-initialized')) {
+                const ctx = skillsChart.getContext('2d');
+                
+                // Simple pie chart simulation
+                const centerX = skillsChart.width / 2;
+                const centerY = skillsChart.height / 2;
+                const radius = Math.min(centerX, centerY) - 20;
+
+                
+                let currentAngle = 0;
+                
+                skills.forEach(skill => {
+                    const sliceAngle = (skill.value / 100) * 2 * Math.PI;
+                    
+                    ctx.beginPath();
+                    ctx.moveTo(centerX, centerY);
+                    ctx.arc(centerX, centerY, radius, currentAngle, currentAngle + sliceAngle);
+                    ctx.closePath();
+                    ctx.fillStyle = skill.color;
+                    ctx.fill();
+                    
+                    // Add labels
+                    const labelAngle = currentAngle + sliceAngle / 2;
+                    const labelX = centerX + Math.cos(labelAngle) * (radius * 0.7);
+                    const labelY = centerY + Math.sin(labelAngle) * (radius * 0.7);
+                    
+                    ctx.fillStyle = 'white';
+                    ctx.font = 'bold 12px Inter';
+                    ctx.textAlign = 'center';
+                    ctx.fillText(skill.name, labelX, labelY);
+                    ctx.fillText(skill.value + '%', labelX, labelY + 15);
+                    
+                    currentAngle += sliceAngle;
+                });
+                
+                skillsChart.setAttribute('data-initialized', 'true');
+            }
+        }
+
+
+
+        // Initialize lesson completion states on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const lessonCompletions = JSON.parse(localStorage.getItem("lessonCompletions") || "{}");
+            const courseCards = document.querySelectorAll(".course-card");
+
+            courseCards.forEach(courseCard => {
+                const courseId = courseCard.id;
+                const lessonsList = courseCard.querySelector(".lessons-list");
+                if (lessonsList) {
+                    Array.from(lessonsList.children).forEach((lesson, index) => {
+                        const key = `${courseId}-lesson-${index}`;
+                        if (lessonCompletions[key]) {
+                            lesson.classList.remove("unlocked", "locked");
+                            lesson.classList.add("completed");
+                            lesson.querySelector(".lesson-status").innerHTML = `<i class="fas fa-check"></i>`;
+                            lesson.querySelector(".lesson-description").style.color = "rgba(255, 255, 255, 0.8)";
+                        } else if (!lesson.classList.contains("locked")) { // If not explicitly locked by HTML and not completed
+                            lesson.classList.add("unlocked");
+                            lesson.querySelector(".lesson-status").innerHTML = index + 1;
+                        }
+                    });
+                }
+            });
+
+            // Initialize unlock buttons and lesson states based on UNLOCKED_COURSES_FROM_SERVER
+            UNLOCKED_COURSES_FROM_SERVER.forEach(courseId => {
+                unlockCourse(courseId);
+            });
+
+            // Initialize progress stats
+            updateProgressStats();
+        });
+
+        const container = document.querySelector('.rotating-stars');
+        for (let i = 0; i < 300; i++) {
+            const star = document.createElement('div');
+            star.className = 'star-dot';
+            star.style.top = `${Math.random() * 200}vh`;
+            star.style.left = `${Math.random() * 200}vw`;
+            container.appendChild(star);
+        }
+
+    </script>
+
+<!-- Razorpay Payment Integration -->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+
+function unlockCourse(courseId) {
+    const courseCard = document.getElementById(courseId);
+    if (!courseCard) return;
+
+    // 1. Remove the "Unlock Course" button
+    const unlockBtn = courseCard.querySelector('.unlock-btn');
+    if (unlockBtn) {
+        unlockBtn.style.display = 'none';
+    }
+
+    // 2. Enable the "Details" and "Lessons" buttons
+    const detailsBtn = courseCard.querySelector('.details-btn');
+    const lessonsBtn = courseCard.querySelector('.lessons-btn');
+    if (detailsBtn) detailsBtn.disabled = false;
+    if (lessonsBtn) lessonsBtn.disabled = false;
+
+        // 3. Unlock all lessons within that course visually
+    const lessons = courseCard.querySelectorAll(".lesson-item"); // Select all lesson items
+    lessons.forEach((lesson, index) => {
+        lesson.classList.remove("locked");
+        lesson.classList.add("unlocked");
+        
+        // Restore the lesson number in the status circle
+        const lessonStatus = lesson.querySelector(".lesson-status");
+        if (lessonStatus) {
+            lessonStatus.innerHTML = index + 1; // Assuming first lesson is index 0
+        }
+
+        // Re-attach the click handler
+        const videoId = lesson.getAttribute("data-video-id");
+        if (videoId) {
+            lesson.setAttribute("onclick", `openLesson("${courseId}", "${videoId}", ${index})`);
+        }
+    });
+
+    console.log(`Course ${courseId} has been visually unlocked.`);
+}
+
+
+// Loading overlay helper functions
+function showLoadingOverlay(message = "Processing...") {
+    const overlay = document.getElementById('loading-overlay');
+    overlay.textContent = message;
+    overlay.style.display = 'flex';
+}
+
+function hideLoadingOverlay() {
+    const overlay = document.getElementById('loading-overlay');
+    overlay.style.display = 'none';
+}
+
+// Improved async payment function with loading states
+async function payToUnlockCourse(courseId, amount) {
+    try {
+        // Disable the unlock button to prevent multiple clicks
+        const unlockBtn = document.querySelector(`#${courseId} .unlock-btn`);
+        if (unlockBtn) {
+            unlockBtn.disabled = true;
+            unlockBtn.textContent = 'Processing...';
+        }
+
+        showLoadingOverlay("Creating payment order...");
+
+        // Step 1: Create the order on your server with timeout
+        const orderResponse = await Promise.race([
+            fetch("/create-order/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": CSRF_TOKEN
+                },
+                body: JSON.stringify({ amount: amount, course_id: courseId })
+            }),
+            new Promise((_, reject) => 
+                setTimeout(() => reject(new Error('Request timeout')), 10000)
+            )
+        ]);
+
+        if (!orderResponse.ok) {
+            throw new Error(`Server responded with status: ${orderResponse.status}`);
+        }
+
+        const order = await orderResponse.json();
+        hideLoadingOverlay();
+
+        // Step 2: Open Razorpay checkout
+        const options = {
+            key: "{{ razorpay_key|default:'rzp_test_MzOEbqdSkP1EB6' }}",
+            amount: order.amount,
+            currency: "INR",
+            name: "Digital Taekwondo Academy",
+            description: "Unlock Full Course",
+            order_id: order.id,
+            handler: async function (response) {
+                try {
+                    showLoadingOverlay("Verifying payment...");
+                    
+                    // Step 3: Verify payment with timeout
+                    const verifyResponse = await Promise.race([
+                        fetch("/verify-payment/", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                                "X-CSRFToken": CSRF_TOKEN
+                            },
+                            body: JSON.stringify({
+                                razorpay_order_id: response.razorpay_order_id,
+                                razorpay_payment_id: response.razorpay_payment_id,
+                                razorpay_signature: response.razorpay_signature,
+                                course_id: courseId
+                            })
+                        }),
+                        new Promise((_, reject) => 
+                            setTimeout(() => reject(new Error('Verification timeout')), 15000)
+                        )
+                    ]);
+
+                    const data = await verifyResponse.json();
+                    
+                    if (data.status === "success") {
+                        showLoadingOverlay("Unlocking course...");
+                        
+                        // Add a small delay to show the unlocking process
+                        await new Promise(resolve => setTimeout(resolve, 1000));
+                        
+                        unlockCourse(courseId);
+                        hideLoadingOverlay();
+                        
+                        // Show success message
+                        showSuccessMessage("Payment successful! Course unlocked.");
+                    } else {
+                        hideLoadingOverlay();
+                        showErrorMessage("Payment verification failed. Please contact support.");
+                    }
+                } catch (err) {
+                    hideLoadingOverlay();
+                    console.error("Error verifying payment:", err);
+                    showErrorMessage("An error occurred while verifying your payment. Please try again.");
+                }
+            },
+            modal: {
+                ondismiss: function() {
+                    hideLoadingOverlay();
+                    // Re-enable the unlock button if payment was cancelled
+                    if (unlockBtn) {
+                        unlockBtn.disabled = false;
+                        unlockBtn.textContent = `Unlock Course for ₹${amount}`;
+                    }
+                }
+            },
+            prefill: {
+                name: "{{ user.username|default:'Student' }}",
+                email: "{{ user.email|default:'student@example.com' }}"
+            },
+            theme: {
+                color: "#10b981"
+            }
+        };
+
+        const rzp = new Razorpay(options);
+        rzp.open();
+
+    } catch (error) {
+        hideLoadingOverlay();
+        console.error("Error creating Razorpay order:", error);
+        
+        let errorMessage = "Could not initiate payment. Please try again.";
+        if (error.message === 'Request timeout') {
+            errorMessage = "Request timed out. Please check your connection and try again.";
+        } else if (error.message === 'Verification timeout') {
+            errorMessage = "Payment verification timed out. Please contact support if payment was deducted.";
+        }
+        
+        showErrorMessage(errorMessage);
+        
+        // Re-enable the unlock button
+        const unlockBtn = document.querySelector(`#${courseId} .unlock-btn`);
+        if (unlockBtn) {
+            unlockBtn.disabled = false;
+            unlockBtn.textContent = `Unlock Course for ₹${amount}`;
+        }
+    }
+}
+
+// Success and error message functions
+function showSuccessMessage(message) {
+    const notification = createNotification(message, 'success');
+    document.body.appendChild(notification);
+    setTimeout(() => {
+        notification.remove();
+    }, 5000);
+}
+
+function showErrorMessage(message) {
+    const notification = createNotification(message, 'error');
+    document.body.appendChild(notification);
+    setTimeout(() => {
+        notification.remove();
+    }, 7000);
+}
+
+function createNotification(message, type) {
+    const notification = document.createElement('div');
+    notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 16px 24px;
+        border-radius: 8px;
+        color: white;
+        font-weight: 600;
+        z-index: 10002;
+        max-width: 400px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        animation: slideIn 0.3s ease-out;
+        ${type === 'success' ? 'background: #10b981;' : 'background: #ef4444;'}
+    `;
+    notification.textContent = message;
+    
+    // Add slide-in animation
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+    `;
+    document.head.appendChild(style);
+    
+    return notification;
+}
+
+
+
+
+
+</script>
+
+
+<style>
+.unlock-btn {
+    margin-bottom: 10px;
+    padding: 8px 14px;
+    background: #10b981;
+    border: none;
+    color: white;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+}
+.unlock-btn:hover {
+    background: #059669;
+}
+</style>
+
+</body>
+</html>

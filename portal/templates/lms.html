@@ -1,0 +1,820 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Digital Taekwondo Association - LMS</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary:rgb(150, 0, 0);
+      --secondary:rgb(73, 0, 0);
+      --accent:rgb(150, 0, 0);
+      --light: #f8f9fa;
+      --dark: #222;
+      --text: #333;
+      --text-light: #555;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--light);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* Header with animated gradient */
+header {
+  /* Existing gradient */
+  background: linear-gradient(135deg, rgba(150, 0, 0, 0.5), rgba(0, 60, 116, 0.5)); /* Added 0.9 alpha to both colors */
+  background-size: 200% 200%;
+  animation: gradientBG 15s ease infinite;
+  color: white;
+  padding: 5px 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+    header.scrolled {
+      padding: 15px 5%;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .logo {
+      display: flex;
+      
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo img {
+      height: 120px;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+    }
+
+    .logo h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 24px;
+      font-weight: 800;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: white;
+      font-weight: 500;
+      transition: all 0.3s;
+      position: relative;
+      padding: 5px 0;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: rgb(255, 255, 255);
+      transition: width 0.3s;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    nav a:hover {
+      color: white;
+    }
+
+    .auth-buttons {
+      display: flex;
+      gap: 15px;
+      margin-left: 30px;
+    }
+
+    /* Hero section with particle animation */
+    .hero {
+      background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("{% static 'taek2.jpg' %}") no-repeat center center/cover;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+      padding: 0 20px;
+    }
+
+    .hero h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 3.5rem;
+      color: white;
+      margin-bottom: 20px;
+      line-height: 1.2;
+      text-shadow: 0 0 8px rgba(0,0,0,0.7), 0 0 15px rgba(0,0,0,0.5);
+      animation: fadeInUp 1s ease-out;
+    }
+
+    .hero p {
+      color: rgba(255,255,255,0.9);
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      animation: fadeInUp 1s ease-out 0.2s forwards;
+      opacity: 0;
+      text-shadow: 0 0 4px rgba(0,0,0,0.7);
+    }
+
+    .hero-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      animation: fadeInUp 1s ease-out 0.4s forwards;
+      opacity: 0;
+    }
+
+    /* Animated floating taekwondo elements */
+    .floating-elements {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .floating-elements span {
+      position: absolute;
+      display: block;
+      width: 20px;
+      height: 20px;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23750C0C"><path d="M12 2L4 12l8 10 8-10-8-10zm0 5.5l4.5 4.5-4.5 4.5-4.5-4.5 4.5-4.5z"/></svg>') no-repeat center center;
+      opacity: 0.6;
+      animation: float 15s linear infinite;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.6;
+      }
+      90% {
+        opacity: 0.6;
+      }
+      100% {
+        transform: translateY(-100px) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* Main content sections */
+    .section {
+      padding: 100px 5%;
+      position: relative;
+      background: black
+    }
+
+    .section:nth-child(even) {
+      background:rgb(0, 0, 0);
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .section-header h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.5rem;
+      color: white;
+      margin-bottom: 15px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-header h3::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+
+    .section-header p {
+      color: white;
+      font-size: 1.1rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    /* Features grid with 3D hover effect */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-top: 50px;
+    }
+
+    .feature-card {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: var(--accent);
+      transition: all 0.4s;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+    }
+
+    .feature-card:hover::before {
+      height: 10px;
+    }
+
+    .feature-icon {
+      font-size: 2.5rem;
+      color: var(--secondary);
+      margin-bottom: 20px;
+    }
+
+    .feature-card h4 {
+      font-size: 1.5rem;
+      color: var(--primary);
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+
+    .feature-card p {
+      color: var(--text-light);
+      line-height: 1.7;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .author-img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      overflow: hidden;
+    }
+
+    .author-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .author-info h5 {
+      font-size: 1.1rem;
+      color: var(--primary);
+      margin-bottom: 5px;
+    }
+
+    .author-info p {
+      color: var(--text-light);
+      font-size: 0.9rem;
+    }
+
+    .slider-nav {
+      display: flex;
+      justify-content: center;
+      margin-top: 30px;
+      gap: 10px;
+    }
+
+    .slider-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #ccc;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .slider-dot.active {
+      background: var(--secondary);
+      transform: scale(1.2);
+    }
+
+
+    .form-group {
+      margin-bottom: 25px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--primary);
+      font-weight: 500;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: all 0.3s;
+    }
+
+    .form-control:focus {
+      border-color: var(--secondary);
+      box-shadow: 0 0 0 3px rgba(0, 85, 165, 0.2);
+      outline: none;
+    }
+
+    textarea.form-control {
+      min-height: 150px;
+      resize: vertical;
+    }
+
+    /* Footer with social links */
+    footer {
+      background: rgb(0,0,0);
+      color: white;
+      padding: 60px 5% 30px;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .footer-column h4 {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    .footer-column h4::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 50px;
+      height: 2px;
+      background: var(--accent);
+    }
+
+    .footer-column p {
+      color: rgba(255,255,255,0.7);
+      line-height: 1.7;
+      margin-bottom: 15px;
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 10px;
+    }
+
+    .footer-links a {
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      transition: all 0.3s;
+      display: inline-block;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent);
+      transform: translateX(5px);
+    }
+
+    .social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .social-links a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      color: white;
+      transition: all 0.3s;
+    }
+
+    .social-links a:hover {
+      background: var(--accent);
+      color: var(--dark);
+      transform: translateY(-5px);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.7);
+      font-size: 0.9rem;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 25px;
+      border-radius: 8px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.3s;
+      cursor: pointer;
+      border: none;
+      gap: 8px;
+    }
+
+    .btn-primary {
+      background: var(--secondary);
+      color: white;
+      box-shadow: 0 4px 15px rgba(113, 0, 0, 0.3);
+    }
+
+    .btn-primary:hover {
+      background: var(--primary);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(113, 0, 0, 0.4);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: white;
+      border: 2px solid white;
+    }
+
+    .btn-secondary:hover {
+      background: white;
+      color: var(--primary);
+      transform: translateY(-3px);
+    }
+
+    .btn-accent {
+      background: var(--accent);
+      color: white;
+      font-weight: 600;
+    }
+
+    .btn-accent:hover {
+      background:rgb(90, 0, 0);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(255, 0, 0, 0.3);
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 992px) {
+      .hero h2 {
+        font-size: 2.8rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        padding: 15px 5%;
+      }
+
+      .logo {
+        margin-bottom: 15px;
+      }
+
+      nav {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 15px;
+      }
+
+      .auth-buttons {
+        margin-left: 0;
+        margin-top: 15px;
+        width: 100%;
+        justify-content: center;
+      }
+
+      .hero h2 {
+        font-size: 2.2rem;
+      }
+
+      .hero p {
+        font-size: 1rem;
+      }
+
+      .hero-buttons {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .section {
+        padding: 70px 5%;
+      }
+
+      .section-header h3 {
+        font-size: 2rem;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .hero h2 {
+        font-size: 1.8rem;
+      }
+
+      .feature-card {
+        padding: 20px;
+      }
+
+      .contact-form {
+        padding: 30px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header id="header">
+    <div class="logo">
+      <img src="{% static 'logo.png' %}" alt="DTA Logo">
+      <h1>Digital Taekwondo Academy</h1>
+    </div>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#features">Features</a>
+      <a href="#instructors">Instructors</a>
+      <a href="#contact">Contact</a>
+      <div class="auth-buttons">
+        <a href="#" class="btn btn-primary">Login</a>
+        <a href="#" class="btn btn-secondary">Register</a>
+      </div>
+    </nav>
+  </header>
+
+  <section class="hero" id="home">
+    <div class="floating-elements">
+      <!-- Floating elements will be added by JavaScript -->
+    </div>
+    <div class="hero-content">
+      <h2>Master Taekwondo From Anywhere</h2>
+      <p>Join our digital dojang and train with world-class instructors at your own pace, anytime, anywhere.</p>
+      <div class="hero-buttons">
+        <a href="/sign" class="btn btn-accent">Sign Up</a>
+        <a href="/login" class="btn btn-secondary">Log in</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="about">
+    <div class="section-header">
+      <h3>About Our Digital Dojang</h3>
+      <p>Digital Taekwondo Association (DTA) is revolutionizing martial arts education with our cutting-edge online platform that brings authentic Taekwondo training to your home.</p>
+    </div>
+    
+    </div>
+  </section>
+
+  
+
+  <section class="section" id="features">
+    <div class="section-header">
+      <h3>Platform Features</h3>
+      <p>Our Learning Management System is packed with features designed to enhance your Taekwondo journey</p>
+    </div>
+    <div class="features">
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-video"></i>
+        </div>
+        <h4>Interactive Video Lessons</h4>
+        <p>High-definition instructional videos with multi-angle views, slow motion, and technique breakdowns for perfecting every move.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-mobile-alt"></i>
+        </div>
+        <h4>Mobile-Friendly</h4>
+        <p>Access training materials anytime, anywhere through our responsive platform that works seamlessly on all devices.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-chart-line"></i>
+        </div>
+        <h4>Performance Analytics</h4>
+        <p>Detailed progress tracking with metrics on technique, flexibility, strength, and stamina improvements over time.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-calendar-check"></i>
+        </div>
+        <h4>Live Session Booking</h4>
+        <p>Schedule private virtual sessions with instructors for personalized feedback and guidance.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-trophy"></i>
+        </div>
+        <h4>Belt Testing</h4>
+        <p>Official virtual belt testing with certified examiners and digital certification upon passing.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-users"></i>
+        </div>
+        <h4>Community Challenges</h4>
+        <p>Participate in monthly challenges, compete with peers, and earn badges for your achievements.</p>
+      </div>
+    </div>
+  </section>
+
+
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-column">
+        <h4>About DTA</h4>
+        <p>Digital Taekwondo Association is a pioneer in online martial arts education, bringing authentic Taekwondo training to students worldwide through innovative technology.</p>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+      <div class="footer-column">
+        <h4>Quick Links</h4>
+        <ul class="footer-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#instructors">Instructors</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Training Programs</h4>
+        <ul class="footer-links">
+          <li><a href="#">Beginner Courses</a></li>
+          <li><a href="#">Intermediate Training</a></li>
+          <li><a href="#">Advanced Techniques</a></li>
+          <li><a href="#">Children's Classes</a></li>
+          <li><a href="#">Self-Defense Workshops</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Contact Info</h4>
+        <p><i class="fas fa-envelope"></i> abc</p>
+        <p><i class="fas fa-phone"></i> 123</p>
+        <p><i class="fas fa-map-marker-alt"></i> xyz</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Digital Taekwondo Association. All Rights Reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+    </div>
+  </footer>
+
+  <script>
+    // Header scroll effect
+    window.addEventListener('scroll', function() {
+      const header = document.getElementById('header');
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // Create floating elements
+    const floatingContainer = document.querySelector('.floating-elements');
+    for (let i = 0; i < 20; i++) {
+      const element = document.createElement('span');
+      element.style.left = Math.random() * 100 + '%';
+      element.style.top = Math.random() * 100 + '%';
+      element.style.width = (Math.random() * 20 + 10) + 'px';
+      element.style.height = element.style.width;
+      element.style.animationDuration = (Math.random() * 10 + 10) + 's';
+      element.style.animationDelay = Math.random() * 5 + 's';
+      floatingContainer.appendChild(element);
+    }
+
+
+
+    dots.forEach(dot => {
+      dot.addEventListener('click', function() {
+        const slideIndex = parseInt(this.getAttribute('data-slide'));
+        showTestimonial(slideIndex);
+      });
+    });
+
+
+    // Animate elements on scroll
+    const animateOnScroll = function() {
+      const elements = document.querySelectorAll('.feature-card, .instructor-card, .belt');
+      
+      elements.forEach(element => {
+        const elementPosition = element.getBoundingClientRect().top;
+        const screenPosition = window.innerHeight / 1.2;
+        
+        if (elementPosition < screenPosition) {
+          element.style.opacity = '1';
+          element.style.transform = 'translateY(0)';
+        }
+      });
+    };
+
+    // Set initial state for animation
+    document.querySelectorAll('.feature-card, .instructor-card').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    });
+
+    document.querySelectorAll('.belt').forEach((belt, index) => {
+      belt.style.opacity = '0';
+      belt.style.transform = 'translateX(-20px)';
+      belt.style.transition = `opacity 0.5s ease ${index * 0.1}s, transform 0.5s ease ${index * 0.1}s`;
+    });
+
+    window.addEventListener('scroll', animateOnScroll);
+    window.addEventListener('load', animateOnScroll);
+  </script>
+</body>
+</html>
